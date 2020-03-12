@@ -4,7 +4,7 @@ module.exports = {
     type: 'FOREIGN KEY',
     name: 'FK_promotions_programs', // useful if using queryInterface.removeConstraint
     references: {
-      table: 'programs',
+      table: 'Programs',
       field: 'id',
     },
     onDelete: 'no action',

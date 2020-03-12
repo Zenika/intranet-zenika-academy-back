@@ -1,10 +1,13 @@
 const express = require('express');
+const http = require('http');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const promotions = require('./routes/promotions');
 const users = require('./routes/users');
 const programs = require('./routes/programs');
 
+
+const port = process.env.PORT || '4000';
 const app = express();
 
 app.use(cors());
@@ -38,5 +41,5 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.send(res.locals.message);
 });
-
-module.exports = app;
+const server = http.createServer(app);
+server.listen(port, () => console.log(`Server started on port ${port}`));
