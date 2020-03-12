@@ -1,6 +1,6 @@
 version: "3"
 services:
-  postgres:
+  mysql:
     image: mysql:latest
     ports: 
       - "3306:3306"
