@@ -1,12 +1,14 @@
 version: "3"
 services:
   mysql:
-    image: mysql:latest
+    image: mysql:8
     ports: 
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: zintranet
-      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mysql:/var/lib/mysql
 volumes:
