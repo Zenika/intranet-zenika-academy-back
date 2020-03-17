@@ -9,6 +9,14 @@ module.exports = {
     port: process.env.MYSQL_PORT,
     dialect: 'mysql',
   },
+  test: {
+    database: process.env.MYSQL_DATABASE,
+    username: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    host: process.env.MYSQL_HOST,
+    port: process.env.MYSQL_PORT,
+    dialect: 'mysql',
+  },
   production: {
     database: process.env.MYSQL_ADDON_DB,
     username: process.env.MYSQL_ADDON_USER,

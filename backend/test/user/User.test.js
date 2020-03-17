@@ -8,17 +8,6 @@ describe('Test User Controller Api call', () => {
   let testStudentUserId = '';
   let testStudentUserRole = 0;
 
-  it('Get all Users', async (done) => {
-    const response = await httpMethod.get('/api/users').expect(200);
-    if (response.body.length > 1) {
-      expect(response.body[0].id).toEqual(expect.any(Number));
-      expect(response.body[0].firstName).toEqual(expect.any(String));
-      expect(response.body[0].lastName).toEqual(expect.any(String));
-      expect(response.body[0].role).toEqual(expect.any(Number));
-      done();
-    }
-  });
-
   it('Get all Users (fail)', async (done) => {
     await httpMethod.get('/api/user')
       .expect(404);
