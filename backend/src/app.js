@@ -34,7 +34,7 @@ app.use(async (req, res, next) => {
     console.error("ERROR: No authorization header provided, yet this is a protected route");
     return;
   }
-  const token = authorizationHeader.split(" ")[1];
+  const [, token] = authorizationHeader.split(" ")
   const result = await verifyJwt(token);
   console.log("result", result);
   if(!result){
