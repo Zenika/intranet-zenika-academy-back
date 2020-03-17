@@ -1,13 +1,29 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-# Use a package of configuration called an orb.
-orbs:
-  # Declare a dependency on the welcome-orb
-  welcome: circleci/welcome-orb@0.4.1
-# Orchestrate or schedule a set of jobs
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12
+        environment:
+          MYSQL_HOST: localhost
+          MYSQL_PORT: 3306
+          MYSQL_DATABASE: zintranet
+          MYSQL_USER: zintranet
+          MYSQL_PASSWORD: zintranet
+      - image: mysql:8
+        environment:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: zintranet
+          MYSQL_USER: zintranet
+          MYSQL_PASSWORD: zintranet
+    working_directory: backend
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
 workflows:
-  # Name the workflow "welcome"
-  welcome:
-    # Run the welcome/run job in its own container
+  build:
     jobs:
-      - welcome/run
+      - build
