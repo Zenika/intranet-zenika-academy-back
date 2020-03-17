@@ -42,4 +42,5 @@ app.use((err, req, res) => {
   res.send(res.locals.message);
 });
 const server = http.createServer(app);
+// eslint-disable-next-line no-console
 server.listen(port, () => console.log(`Server started on port ${port}`));
