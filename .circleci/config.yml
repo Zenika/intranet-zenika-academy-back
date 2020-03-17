@@ -16,12 +16,17 @@ jobs:
           MYSQL_DATABASE: zintranet
           MYSQL_USER: zintranet
           MYSQL_PASSWORD: zintranet
-    working_directory: backend
     steps:
       - checkout
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
+      - run:
+          command: npm ci
+          working_directory: backend
+      - run:
+          command: npm run lint
+          working_directory: backend
+      - run:
+          command: npm test
+          working_directory: backend
 
 workflows:
   build:
