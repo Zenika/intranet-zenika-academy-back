@@ -14,19 +14,16 @@ export class PromoCreateStepTwo extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      axios
-        .get('http://localhost:4000/api/programs')
-        .then((res) =>
-          res.data.forEach((program) => {
-            if (program.type === 1) {
-              const obj = { label: program.title, value: program.id };
-              this.setState((state) => {
-                const programList = state.programs.push(obj);
-                return programList;
-              });
-            }
-          }),
-        )
+      axios.get('/api/programs', { withCredentials: true })
+        .then((res) => res.data.forEach((program) => {
+          if (program.type === 1) {
+            const obj = { label: program.title, value: program.id };
+            this.setState((state) => {
+              const programList = state.programs.push(obj);
+              return programList;
+            });
+          }
+        }))
         .catch((err) => err);
     }, 100);
   }

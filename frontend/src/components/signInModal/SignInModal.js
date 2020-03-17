@@ -23,17 +23,16 @@ export class SignInModal extends Component {
 
   handleSignIn(user) {
     const { connect, toggleModal } = this.props;
-    axios
-      .post('http://localhost:4000/api/users/signin', user)
+    axios.post('/api/users/signin', user)
       .then((res) => {
+        console.log("cookies", res.data)
         const decodedToken = jwt.decode(res.data.token);
         sessionStorage.setItem('promoId', `${decodedToken.promoId}`);
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('userRole', `${decodedToken.role}`);
-        sessionStorage.setItem('token', res.data.token);
         if (decodedToken.promoId) {
-          const url = `http://localhost:4000/api/promotions/details/${decodedToken.promoId}`;
-          axios.get(url)
+          const url = `/api/promotions/details/${decodedToken.promoId}`;
+          axios.get(url, { withCredentials: true })
             .then((result) => {
               sessionStorage.setItem('programId', `${result.data.program.id}`);
             });

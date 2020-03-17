@@ -22,14 +22,11 @@ class ProgramFormContainer extends React.Component {
   componentDidMount() {
     const { match } = this.props;
     if (match.params.id) {
-      const url = `http://localhost:4000/api/programs/${parseInt(
-        match.params.id,
-        10,
-      )}/details`;
-      return Axios.get(url).then((result) => {
-        document.title = 'Admin / Programme édition';
-        this.setState(
-          {
+      const url = `/api/programs/${parseInt(match.params.id, 10)}/details`;
+      return Axios.get(url, { withCredentials: true })
+        .then((result) => {
+          document.title = 'Admin / Programme édition';
+          this.setState({
             program: result.data,
             step: 0,
             edit: 1,

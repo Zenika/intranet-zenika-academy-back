@@ -76,9 +76,14 @@ module.exports = {
         foundUser.password,
       );
       if (!allowedUser) throw new Error('wrong credentials');
+      const token = await createJwt({ role: foundUser.role, email: foundUser.email, promoId: foundUser.promotionId });
       return res
+        .cookie('token', token, {
+          maxAge: 900000,
+          httpOnly: true
+        })
         .status(200)
-        .json({token: await createJwt({ role: foundUser.role, email: foundUser.email, promoId: foundUser.promotionId })});
+        .send({token});
     } catch (error) {
       return res.status(403).json({ error: error.message });
     }

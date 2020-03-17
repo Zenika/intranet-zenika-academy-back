@@ -17,13 +17,12 @@ class RecapProgramForm extends React.Component {
     document.title = "Admin / Récapitulatif création d'utilisateur";
   }
 
-  createUser = (e) => {
-    e.preventDefault();
-    const { user } = this.state;
-    Axios.post('http://localhost:4000/api/users ', user).then(() =>
-      this.setState(() => ({ redirectToReferrer: true })),
-    );
-  };
+    createUser = (e) => {
+      e.preventDefault();
+      const { user } = this.state;
+      Axios.post('/api/users ', user, { withCredentials: true })
+        .then(() => this.setState(() => ({ redirectToReferrer: true })));
+    };
 
   render() {
     const { user } = this.props;

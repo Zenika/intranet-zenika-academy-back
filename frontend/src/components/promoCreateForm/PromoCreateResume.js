@@ -37,28 +37,20 @@ class PromoCreateResume extends Component {
         students,
         teachersToUpsert,
       };
-      return axios
-        .put(`http://localhost:4000/api/promotions/${promoId}/update`, {
-          promoData,
-          users,
-        })
+      return axios.put(`/api/promotions/${promoId}/update`, { promoData, users }, { withCredentials: true })
         .then(() => {
           this.setState({ redirectionToHome: true });
         })
         .catch((err) => err);
     }
-    return axios
-      .post('http://localhost:4000/api/promotions', {
-        promoData,
-        teachersToUpsert,
-      })
+    return axios.post('/api/promotions', { promoData, teachersToUpsert }, { withCredentials: true })
       .then((res) => {
         students.forEach((student) => {
           const newStudent = {
             ...student,
             promotionId: res.data.id,
           };
-          axios.post('http://localhost:4000/api/users', newStudent);
+          axios.post('/api/users', newStudent, { withCredentials: true });
         });
         this.setState({ redirectionToHome: true });
       })

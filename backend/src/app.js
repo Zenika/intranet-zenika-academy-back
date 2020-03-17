@@ -2,15 +2,28 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const promotions = require('./routes/promotions');
 const users = require('./routes/users');
 const programs = require('./routes/programs');
 const {verifyJwt} = require('./utils/jwt');
 
+if(!process.env.JWT_SECURITY_KEY){
+  throw new Error("ERROR: JWT_SECURITY_KEY env variable not set")
+}
+if(!process.env.COOKIE_SECURITY_KEY){
+  throw new Error("ERROR: COOKIE_SECURITY_KEY env variable not set")
+}
 const port = process.env.PORT || '4000';
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    `${process.env.FRONT_URL}`,
+    'http://localhost:3000'
+  ],
+  credentials: true
+}));
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,26 +36,28 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(cookieParser(
+  process.env.COOKIE_SECURITY_KEY
+))
+
 app.use(async (req, res, next) => {
   if(req.url === "/api/users/signin"){
     next();
     return;
   }
-  const authorizationHeader = req.headers.authorization;
-  if(!authorizationHeader){
-    res.sendStatus(403);
-    console.error("ERROR: No authorization header provided, yet this is a protected route");
-    return;
+  const token = req.cookies.token || '';
+  try{
+    const result = await verifyJwt(token);
+    if(!result){
+      res.sendStatus(403);
+      console.error("ERROR: Could not verify JWT");
+      return;
+    }
+    next();
+  }catch(err){
+    res.status(403).send(err);
   }
-  const [, token] = authorizationHeader.split(" ")
-  const result = await verifyJwt(token);
-  console.log("result", result);
-  if(!result){
-    res.sendStatus(403);
-    console.error("ERROR: Could not verify JWT");
-    return;
-  }
-  next();
+  
 })
 
 app.use('/api/users', users);
