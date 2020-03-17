@@ -1,3 +1,4 @@
+const { createJwt } = require('../../utils/jwt');
 const bcrypt = require('bcryptjs');
 const { Users } = require('../../models');
 
@@ -75,11 +76,9 @@ module.exports = {
         foundUser.password,
       );
       if (!allowedUser) throw new Error('wrong credentials');
-      return res.status(200).json({
-        role: foundUser.role,
-        email: foundUser.email,
-        promoId: foundUser.promotionId,
-      });
+      return res
+        .status(200)
+        .json({token: await createJwt({ role: foundUser.role, email: foundUser.email, promoId: foundUser.promotionId })});
     } catch (error) {
       return res.status(403).json({ error: error.message });
     }
