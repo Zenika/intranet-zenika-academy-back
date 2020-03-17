@@ -25,6 +25,9 @@ jobs:
           command: npm run lint
           working_directory: backend
       - run:
+          command: npm run migrate
+          working_directory: backend
+      - run:
           command: npm test
           working_directory: backend
 
