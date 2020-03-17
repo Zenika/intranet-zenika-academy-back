@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const promotions = require('./routes/promotions');
 const users = require('./routes/users');
 const programs = require('./routes/programs');
+const {verifyJwt} = require('./utils/jwt');
 
 const port = process.env.PORT || '4000';
 const app = express();
@@ -21,6 +22,28 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(async (req, res, next) => {
+  if(req.url === "/api/users/signin"){
+    next();
+    return;
+  }
+  const authorizationHeader = req.headers.authorization;
+  if(!authorizationHeader){
+    res.sendStatus(403);
+    console.error("ERROR: No authorization header provided, yet this is a protected route");
+    return;
+  }
+  const token = authorizationHeader.split(" ")[1];
+  const result = await verifyJwt(token);
+  console.log("result", result);
+  if(!result){
+    res.sendStatus(403);
+    console.error("ERROR: Could not verify JWT");
+    return;
+  }
+  next();
+})
 
 app.use('/api/users', users);
 app.use('/api/programs', programs);

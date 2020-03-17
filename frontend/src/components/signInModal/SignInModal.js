@@ -30,6 +30,7 @@ export class SignInModal extends Component {
         sessionStorage.setItem('promoId', `${decodedToken.promoId}`);
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('userRole', `${decodedToken.role}`);
+        sessionStorage.setItem('token', res.data.token);
         if (decodedToken.promoId) {
           const url = `http://localhost:4000/api/promotions/details/${decodedToken.promoId}`;
           axios.get(url)
