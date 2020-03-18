@@ -32,7 +32,7 @@ export class PromoCreateContainer extends Component {
       document.title = 'Edition de promotion';
       const { id } = match.params;
       const url = `/api/promotions/details/${parseInt(id, 10)}`;
-      Axios.get(url, { withCredentials: true })
+      Axios.get(url)
         .then((result) => {
           const { users, promotion, program } = result.data;
           users.forEach((user) => {

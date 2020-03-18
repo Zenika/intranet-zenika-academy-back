@@ -15,7 +15,7 @@ class RecapProgramForm extends React.Component {
   createProgram = (e) => {
     e.preventDefault();
     const { program } = this.props;
-    Axios.post('/api/programs', program, { withCredentials: true })
+    Axios.post('/api/programs', program)
       .then(() => this.setState(() => ({ redirectToReferrer: true })));
   };
 

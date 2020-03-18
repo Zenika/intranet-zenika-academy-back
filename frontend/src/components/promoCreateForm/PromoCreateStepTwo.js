@@ -14,7 +14,7 @@ export class PromoCreateStepTwo extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      axios.get('/api/programs', { withCredentials: true })
+      axios.get('/api/programs')
         .then((res) => res.data.forEach((program) => {
           if (program.type === 1) {
             const obj = { label: program.title, value: program.id };

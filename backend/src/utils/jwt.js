@@ -1,14 +1,16 @@
 const jwt = require('jsonwebtoken');
 
-const createJwt = async user => {
-  return jwt.sign(
+const createJwt = (user, callback) => {
+  jwt.sign(
     user,
-    process.env.JWT_SECURITY_KEY || ""
+    process.env.JWT_SECRET || "",
+    {},
+    callback
   );
 };
 
-const verifyJwt = async token => {
-  return jwt.verify(token, process.env.JWT_SECURITY_KEY || "");
+const verifyJwt = (token, callback) => {
+  jwt.verify(token, process.env.JWT_SECRET || "", {}, callback);
 };
 
 module.exports = {

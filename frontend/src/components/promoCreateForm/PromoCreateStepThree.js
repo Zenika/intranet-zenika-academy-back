@@ -15,7 +15,7 @@ export class PromoCreateStepThree extends Component {
   componentDidMount() {
     const { promo } = this.props;
     setTimeout(() => {
-      axios.get('/api/users', { withCredentials: true })
+      axios.get('/api/users')
         .then((res) => res.data.forEach((teacher) => {
           /** RETRIEVE ONLY AVAILABLE OR THIS PROMO TEACHERS FOR MULTISELECT */
           if (teacher.role === 2) {

@@ -1,29 +1,25 @@
 const express = require('express');
 const http = require('http');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const promotions = require('./routes/promotions');
 const users = require('./routes/users');
 const programs = require('./routes/programs');
-const {verifyJwt} = require('./utils/jwt');
+const { verifyJwt } = require('./utils/jwt');
 
-if(!process.env.JWT_SECURITY_KEY){
+if(!process.env.JWT_SECRET){
   throw new Error("ERROR: JWT_SECURITY_KEY env variable not set")
 }
-if(!process.env.COOKIE_SECURITY_KEY){
-  throw new Error("ERROR: COOKIE_SECURITY_KEY env variable not set")
+if(!process.env.COOKIE_SECRET){
+  throw new Error("ERROR: COOKIE_SECRET env variable not set")
 }
+if(!process.env.COOKIE_MAX_AGE_IN_MS){
+  throw new Error("ERROR: COOKIE_MAX_AGE_IN_MS env variable not set")
+}
+
 const port = process.env.PORT || '4000';
 const app = express();
 
-app.use(cors({
-  origin: [
-    `${process.env.FRONT_URL}`,
-    'http://localhost:3000'
-  ],
-  credentials: true
-}));
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -37,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cookieParser(
-  process.env.COOKIE_SECURITY_KEY
+  process.env.COOKIE_SECRET
 ))
 
 app.use(async (req, res, next) => {
@@ -47,13 +43,14 @@ app.use(async (req, res, next) => {
   }
   const token = req.cookies.token || '';
   try{
-    const result = await verifyJwt(token);
-    if(!result){
-      res.sendStatus(403);
-      console.error("ERROR: Could not verify JWT");
-      return;
-    }
-    next();
+    verifyJwt(token, (err, decoded) => {
+      if(err || !decoded){
+        res.sendStatus(403);
+        console.error("ERROR: Could not verify JWT");
+        return;
+      }
+      next();
+    });
   }catch(err){
     res.status(403).send(err);
   }

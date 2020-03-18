@@ -36,7 +36,7 @@ class ProgramDetails extends Component {
     if (JSON.parse(promoId) !== null) {
       this.setState({ promotionId: promoId });
     }
-    axios.get(`/api/programs/${id}/details`, { withCredentials: true })
+    axios.get(`/api/programs/${id}/details`)
       .then((res) => {
         const programDetails = res.data;
         if (this._isMounted) {
@@ -100,7 +100,7 @@ class ProgramDetails extends Component {
     const url = `/api/programs/${id}`;
     // eslint-disable-next-line no-restricted-globals,no-alert
     if (confirm('Voulez vous supprimer ce programme?')) {
-      axios.delete(url, { withCredentials: true })
+      axios.delete(url)
         .then(() => {
           this.setState({ redirectToAdmin: true });
         })

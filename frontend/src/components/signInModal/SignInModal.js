@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
 import axios from 'axios';
 
 export class SignInModal extends Component {
@@ -25,20 +24,18 @@ export class SignInModal extends Component {
     const { connect, toggleModal } = this.props;
     axios.post('/api/users/signin', user)
       .then((res) => {
-        console.log("cookies", res.data)
-        const decodedToken = jwt.decode(res.data.token);
-        sessionStorage.setItem('promoId', `${decodedToken.promoId}`);
+        sessionStorage.setItem('promoId', `${res.data.promoId}`);
         sessionStorage.setItem('loggedIn', 'true');
-        sessionStorage.setItem('userRole', `${decodedToken.role}`);
-        if (decodedToken.promoId) {
-          const url = `/api/promotions/details/${decodedToken.promoId}`;
-          axios.get(url, { withCredentials: true })
+        sessionStorage.setItem('userRole', `${res.data.role}`);
+        if (res.data.promoId) {
+          const url = `/api/promotions/details/${res.data.promoId}`;
+          axios.get(url)
             .then((result) => {
               sessionStorage.setItem('programId', `${result.data.program.id}`);
             });
         }
         this.setState({ redirectToUser: false, redirectToAdmin: true });
-        if (decodedToken.role === 3 || decodedToken.role === 2) {
+        if (res.data.role === 3 || res.data.role === 2) {
           this.setState({ redirectToUser: true, redirectToAdmin: false });
         }
         setTimeout(() => connect(), 100);

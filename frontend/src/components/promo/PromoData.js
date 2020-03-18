@@ -29,7 +29,7 @@ class PromoDetails extends Component {
     }
     const { match } = this.props;
     const url = `/api/promotions/details/${parseInt(match.params.id, 10)}`;
-    Axios.get(url, { withCredentials: true })
+    Axios.get(url)
       .then((result) => {
         this.setState({
           users: result.data.users,
@@ -49,7 +49,7 @@ class PromoDetails extends Component {
     const url = `/api/promotions/${id}`;
     // eslint-disable-next-line no-restricted-globals,no-alert
     if (confirm('Voulez vous supprimer cette promotion?')) {
-      Axios.delete(url, { withCredentials: true })
+      Axios.delete(url)
         .then(() => {
           this.setState({ redirectToAdmin: true });
         })

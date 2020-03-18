@@ -18,7 +18,7 @@ class AdminHome extends Component {
     this._isMounted = true;
     document.title = 'Page d\'accueil Admin';
     const token = sessionStorage.getItem("token");
-    axios.get('/api/promotions', { withCredentials: true })
+    axios.get('/api/promotions')
       .then((res) => {
         const promotions = res.data;
         if (this._isMounted) {
@@ -26,7 +26,7 @@ class AdminHome extends Component {
         }
       });
 
-    axios.get('/api/programs', { withCredentials: true })
+    axios.get('/api/programs')
       .then((res) => {
         const programs = res.data;
         if (this._isMounted) {
