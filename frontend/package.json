@@ -33,7 +33,10 @@
     "test:ci": "npm test -- --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.js",
-    "coverage": "npm test -- --coverage"
+    "coverage": "npm test -- --coverage",
+    "prettier": "prettier src/{**/,}*.{js,scss,json}",
+    "prettier:check": "npm run prettier -- --list-different",
+    "prettier:write": "npm run prettier -- --write"
   },
   "browserslist": {
     "production": [
@@ -52,8 +55,9 @@
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
     "eslint-config-airbnb": "^18.0.1",
-    "jest-localstorage-mock": "^2.4.0",
     "eslint-plugin-react": "^7.17.0",
+    "jest-localstorage-mock": "^2.4.0",
+    "prettier": "^1.19.1",
     "react-hot-loader": "^4.12.15",
     "react-test-renderer": "^16.12.0"
   },

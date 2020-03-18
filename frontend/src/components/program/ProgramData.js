@@ -1,5 +1,5 @@
-import React from 'react';
-import '../layout/Layout.scss';
+import React from "react";
+import "../layout/Layout.scss";
 
 const ProgramData = () => (
   <section className="section box mbmd}">

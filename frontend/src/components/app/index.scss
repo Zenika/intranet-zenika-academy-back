@@ -3,8 +3,8 @@
 @import "~bulma/sass/elements/button.sass";
 @import "~bulma/sass/layout/section.sass";
 @import "~bulma-o-steps/bulma-steps.sass";
-@import '~@creativebulma/bulma-collapsible';
-@import '~bulma/bulma';
+@import "~@creativebulma/bulma-collapsible";
+@import "~bulma/bulma";
 
 .carousel {
   width: 60%;
@@ -29,7 +29,7 @@ code {
     monospace;
 }
 
-#root{
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

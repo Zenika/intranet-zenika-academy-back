@@ -1,22 +1,28 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-const expect = require('expect');
+const expect = require("expect");
 
 expect.extend({
   toContainObject(received, argument) {
-    const pass = this.equals(received,
-      expect.arrayContaining([
-        expect.objectContaining(argument),
-      ]));
+    const pass = this.equals(
+      received,
+      expect.arrayContaining([expect.objectContaining(argument)])
+    );
 
     if (pass) {
       return {
-        message: () => (`expected ${this.utils.printReceived(received)} not to contain object ${this.utils.printExpected(argument)}`),
-        pass: true,
+        message: () =>
+          `expected ${this.utils.printReceived(
+            received
+          )} not to contain object ${this.utils.printExpected(argument)}`,
+        pass: true
       };
     }
     return {
-      message: () => (`expected ${this.utils.printReceived(received)} to contain object ${this.utils.printExpected(argument)}`),
-      pass: false,
+      message: () =>
+        `expected ${this.utils.printReceived(
+          received
+        )} to contain object ${this.utils.printExpected(argument)}`,
+      pass: false
     };
-  },
+  }
 });

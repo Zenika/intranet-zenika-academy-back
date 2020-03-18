@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
-
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 export class SignInModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       redirectToAdmin: false,
-      redirectToUser: false,
+      redirectToUser: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
 
   handleChange(e) {
     const { name, value } = e.target;
@@ -24,17 +22,17 @@ export class SignInModal extends Component {
 
   handleSignIn(user) {
     const { connect, toggleModal } = this.props;
-    axios.post('http://localhost:4000/api/users/signin', user)
-      .then((res) => {
-        sessionStorage.setItem('promoId', `${res.data.promoId}`);
-        sessionStorage.setItem('loggedIn', 'true');
-        sessionStorage.setItem('userRole', `${res.data.role}`);
+    axios
+      .post("http://localhost:4000/api/users/signin", user)
+      .then(res => {
+        sessionStorage.setItem("promoId", `${res.data.promoId}`);
+        sessionStorage.setItem("loggedIn", "true");
+        sessionStorage.setItem("userRole", `${res.data.role}`);
         if (res.data.promoId) {
           const url = `http://localhost:4000/api/promotions/details/${res.data.promoId}`;
-          axios.get(url)
-            .then((result) => {
-              sessionStorage.setItem('programId', `${result.data.program.id}`);
-            });
+          axios.get(url).then(result => {
+            sessionStorage.setItem("programId", `${result.data.program.id}`);
+          });
         }
         this.setState({ redirectToUser: false, redirectToAdmin: true });
         if (res.data.role === 3 || res.data.role === 2) {
@@ -52,17 +50,15 @@ export class SignInModal extends Component {
     const { email, password } = this.state;
     const user = {
       email,
-      password,
+      password
     };
 
-    this.setState({ email: '', password: '' });
+    this.setState({ email: "", password: "" });
     return this.handleSignIn(user);
   }
 
   render() {
-    const {
-      email, password, redirectToUser, redirectToAdmin,
-    } = this.state;
+    const { email, password, redirectToUser, redirectToAdmin } = this.state;
     const { handleChange, handleSubmit } = this;
     const { toggleModal } = this.props;
     if (redirectToUser === true) {

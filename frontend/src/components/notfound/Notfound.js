@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import notfound from './notfound.png';
-import './notfound.scss';
+import React from "react";
+import { Link } from "react-router-dom";
+import notfound from "./notfound.png";
+import "./notfound.scss";
 
 const Notfound = () => (
   <div className="container-404">
@@ -10,7 +10,7 @@ const Notfound = () => (
     <p className="subtitle is-3">Voilà qui n&lsquo;était pas prévu ... </p>
     <div>
       <Link to="/" id="goBack">
-                    Retourner à l&lsquo;accueil
+        Retourner à l&lsquo;accueil
       </Link>
     </div>
   </div>

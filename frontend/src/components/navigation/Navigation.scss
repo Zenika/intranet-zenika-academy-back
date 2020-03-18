@@ -3,117 +3,120 @@ $navbar-breakpoint: 720px;
 @import "~bulma/bulma.sass";
 
 a {
-    color: #4a4a4a;
+  color: #4a4a4a;
 }
 
-#adminNavText{
-    align-items: center;
-    display: flex;
-    line-height: 1.5;
-    padding: 0.5rem 0.75rem;
-    position: relative;
+#adminNavText {
+  align-items: center;
+  display: flex;
+  line-height: 1.5;
+  padding: 0.5rem 0.75rem;
+  position: relative;
 }
 
 .navbar-item:hover {
-    color: #990033;
-    font-weight: bolder;
+  color: #990033;
+  font-weight: bolder;
 }
 .navBarLoggedOut {
-    margin: 1.4rem;
-    display: flex;
+  margin: 1.4rem;
+  display: flex;
 }
 
-#navbarLogo, #navBarAvatar  {
-    max-height: 3.75rem;
-    height: 50px;
-    border-radius: 50px;
+#navbarLogo,
+#navBarAvatar {
+  max-height: 3.75rem;
+  height: 50px;
+  border-radius: 50px;
 }
 
 .display-mobile {
-    display: none;
+  display: none;
 }
 
 .display-desktop {
-    display: inline-block;
+  display: inline-block;
 }
 
 .dropdownMenu {
-    right: 0;
-    left: initial;
-    width: 3rem;
-    top: 87%;
+  right: 0;
+  left: initial;
+  width: 3rem;
+  top: 87%;
 }
 
-a:hover{
-    color:#3273dc
+a:hover {
+  color: #3273dc;
 }
 
 .profilItems a {
-    margin-left: 1.4rem;
+  margin-left: 1.4rem;
 }
 
 .dropdownItem:hover {
-    background-color: #fafafa;
+  background-color: #fafafa;
 }
 
-.icon-signout, .icon-signout-admin {
-    font-size: 2rem;
+.icon-signout,
+.icon-signout-admin {
+  font-size: 2rem;
 }
 
 .icon-signout-admin {
-    color: white;
+  color: white;
 }
 
 @media screen and (max-width: 1023px) {
-    .navbar-menu-front {
-        background-color: whitesmoke;
-    }
-    .navbar-menu-admin {
-        background-color: #363636
-    }
+  .navbar-menu-front {
+    background-color: whitesmoke;
+  }
+  .navbar-menu-admin {
+    background-color: #363636;
+  }
 }
 
 @media screen and (max-width: 808px) {
-    .navbar-menu {
-        font-size: 0.85rem;
-    }
+  .navbar-menu {
+    font-size: 0.85rem;
+  }
 }
 
 @media screen and (max-width: 720px) {
-    #display-breakpoint{
-        display: block;
-    }
-    .navbar-menu {
-        background-color: white;
-    }
-    .navbar-item.has-dropdown {
-        padding: 0.5rem 0.75rem;
-    }
+  #display-breakpoint {
+    display: block;
+  }
+  .navbar-menu {
+    background-color: white;
+  }
+  .navbar-item.has-dropdown {
+    padding: 0.5rem 0.75rem;
+  }
 
+  .navbar-item {
+    border-bottom: 1px solid #dbdbdb;
+  }
+  .display-mobile {
+    display: inline-block;
+  }
+  .display-desktop {
+    display: none;
+  }
+  a {
     .navbar-item {
-        border-bottom: 1px solid #dbdbdb;
+      border: none;
     }
-    .display-mobile {
-        display: inline-block;
+    .navbar-item:hover,
+    .navbar-item:focus {
+      background-color: #fafafa;
     }
-    .display-desktop {
-        display: none;
-    }
-    a {
-        .navbar-item {
-            border: none;
-        }
-        .navbar-item:hover, .navbar-item:focus{
-            background-color: #fafafa;
-        }
-    }
+  }
 }
 
 @media screen and (min-width: 720px) {
-    .navbar-item.is-hoverable:focus-within .navbar-dropdown {
-        display: none;
-    }
-    .navbar-item.is-hoverable:hover .navbar-dropdown {
-        display: block;
-    }
+  .navbar-item.is-hoverable:focus-within .navbar-dropdown {
+    display: none;
+  }
+  .navbar-item.is-hoverable:hover .navbar-dropdown {
+    display: block;
+  }
 }

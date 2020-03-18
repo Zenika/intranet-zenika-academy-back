@@ -1,17 +1,21 @@
 [id^="moduleBox"] {
-    background-color: #F0F8FF;
+  background-color: #f0f8ff;
 }
 
-[id^="subModuleBox"]{
-    background-color: #F8F8FF;
+[id^="subModuleBox"] {
+  background-color: #f8f8ff;
 }
 
-[id^="sequenceBox"]{
-    background-color: #F5F5F5;
+[id^="sequenceBox"] {
+  background-color: #f5f5f5;
 }
 
 .root {
-    display: flow-root;
+  display: flow-root;
 }
 
-[id^="add"], [id^="delete"], #clearProgram { padding: 0; }
+[id^="add"],
+[id^="delete"],
+#clearProgram {
+  padding: 0;
+}

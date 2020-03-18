@@ -1,18 +1,18 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Notfound from '../notfound/Notfound';
-import NavigationBar from '../navigation/Navigation';
-import Footer from '../footer/Footer';
-import { PromoCreateContainer } from '../promoCreateForm/PromoCreateContainer';
-import ProgramFormContainer from '../program/ProgramFormContainer';
-import UserCreateContainer from '../user/UserCreateContainer';
-import Home from '../home/Home';
-import AdminHome from '../admin-home/AdminHome';
-import StudentHome from '../student-home/StudentHome';
-import PromoData from '../promo/PromoData';
-import ProgramDetails from '../programDetails/ProgramDetails';
-import ProgramData from '../program/ProgramData';
-import './App.scss';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Notfound from "../notfound/Notfound";
+import NavigationBar from "../navigation/Navigation";
+import Footer from "../footer/Footer";
+import { PromoCreateContainer } from "../promoCreateForm/PromoCreateContainer";
+import ProgramFormContainer from "../program/ProgramFormContainer";
+import UserCreateContainer from "../user/UserCreateContainer";
+import Home from "../home/Home";
+import AdminHome from "../admin-home/AdminHome";
+import StudentHome from "../student-home/StudentHome";
+import PromoData from "../promo/PromoData";
+import ProgramDetails from "../programDetails/ProgramDetails";
+import ProgramData from "../program/ProgramData";
+import "./App.scss";
 
 class App extends React.Component {
   render() {
@@ -52,8 +52,16 @@ class App extends React.Component {
               path="/:role/promo/:id/details"
               component={PromoData}
             />
-            <Route exact path="/admin/promo/:id/details" component={PromoData} />
-            <Route exact path="/admin/program/:id/details" component={ProgramData} />
+            <Route
+              exact
+              path="/admin/promo/:id/details"
+              component={PromoData}
+            />
+            <Route
+              exact
+              path="/admin/program/:id/details"
+              component={ProgramData}
+            />
             <Route
               key="create-program"
               exact

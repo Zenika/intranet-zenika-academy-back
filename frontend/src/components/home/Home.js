@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import '../app/index.scss';
-import '../app/App.scss';
+import React, { Component } from "react";
+import "../app/index.scss";
+import "../app/App.scss";
 
 class Home extends Component {
   componentDidMount() {
-    document.title = 'Page d\'accueil Zintranet';
+    document.title = "Page d'accueil Zintranet";
   }
 
   render() {
