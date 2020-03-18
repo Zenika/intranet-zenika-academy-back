@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  backend-build:
     docker:
       - image: circleci/node:12
         environment:
@@ -31,7 +31,26 @@ jobs:
           command: npm test
           working_directory: backend
 
+  frontend-build:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          command: npm ci
+          working_directory: frontend
+      - run:
+          command: npm run build
+          working_directory: frontend
+      - run:
+          command: npm run lint
+          working_directory: frontend
+      - run:
+          command: npm test
+          working_directory: frontend
+
 workflows:
   build:
     jobs:
-      - build
+      - backend-build
+      - frontend-build
