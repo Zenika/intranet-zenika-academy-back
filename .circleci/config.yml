@@ -46,7 +46,9 @@ jobs:
           command: npm run lint
           working_directory: frontend
       - run:
-          command: npm test
+          # using test:ci because npm test does not terminate on CircleCI
+          # even though it should according to https://create-react-app.dev/docs/running-tests
+          command: npm run test:ci
           working_directory: frontend
 
 workflows:
