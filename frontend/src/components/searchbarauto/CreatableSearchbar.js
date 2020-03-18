@@ -7,11 +7,11 @@ const createOption = (label) => ({
 });
 
 class CreatableSearchbar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading: false,
-      optionsToSave: null,
+      optionsToSave: props.options,
     };
   }
 
@@ -33,7 +33,6 @@ class CreatableSearchbar extends Component {
       options, defaultValue, handleChange, isMulti, name, defaultLabel,
     } = this.props;
     const { isLoading } = this.state;
-    this.setState({ optionsToSave: options });
     return (
       <CreatableSelect
         isClearable
