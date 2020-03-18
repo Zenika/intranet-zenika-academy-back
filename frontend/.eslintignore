@@ -1,6 +1,2 @@
-*.css
-*.scss
-*.svg
-*.jpg
-*.snap
-*.png
+setupTests.js
+serviceWorker.js
