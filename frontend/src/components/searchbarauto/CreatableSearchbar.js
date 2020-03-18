@@ -33,7 +33,7 @@ class CreatableSearchbar extends Component {
       options, defaultValue, handleChange, isMulti, name, defaultLabel,
     } = this.props;
     const { isLoading } = this.state;
-    this.state.optionsToSave = options;
+    this.setState({ optionsToSave: options });
     return (
       <CreatableSelect
         isClearable
