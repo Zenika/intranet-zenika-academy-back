@@ -13,7 +13,7 @@
     "pm2:log": "pm2 logs",
     "test": "jest --forceExit",
     "migrate": "sequelize-cli db:migrate",
-    "lint": "eslint ./src",
+    "lint": "eslint ./src/**",
     "prettier": "prettier src/{**/,}*.{js,json} test/{**/,}*.{js,json}",
     "prettier:check": "npm run prettier -- --list-different",
     "prettier:write": "npm run prettier -- --write"
