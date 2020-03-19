@@ -44,7 +44,7 @@ app.use(async (req, res, next) => {
   const token = req.cookies.token || '';
   try{
     verifyJwt(token, (err, decoded) => {
-      if(err || !decoded){
+      if(err){
         res.sendStatus(403);
         console.error("ERROR: Could not verify JWT");
         return;
