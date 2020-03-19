@@ -25,6 +25,9 @@ jobs:
           command: npm run lint
           working_directory: backend
       - run:
+          command: npm run prettier:check
+          working_directory: backend
+      - run:
           command: npm run migrate
           working_directory: backend
       - run:
@@ -44,6 +47,9 @@ jobs:
           working_directory: frontend
       - run:
           command: npm run lint
+          working_directory: frontend
+      - run:
+          command: npm run prettier:check
           working_directory: frontend
       - run:
           # using test:ci because npm test does not terminate on CircleCI
