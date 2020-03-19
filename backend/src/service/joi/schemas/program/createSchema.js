@@ -1,14 +1,13 @@
-const Joi = require('@hapi/joi');
+const Joi = require("@hapi/joi");
 
 const create = Joi.object({
-  title: Joi.string()
-    .required(),
+  title: Joi.string().required(),
 
   type: Joi.number()
     .integer()
     .required(),
 
-  content: Joi.array(),
+  content: Joi.array()
 }).required();
 
 module.exports = create;
