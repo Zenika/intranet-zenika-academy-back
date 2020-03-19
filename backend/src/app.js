@@ -46,7 +46,7 @@ app.use(async (req, res, next) => {
     verifyJwt(token, (err, decoded) => {
       if(err){
         res.sendStatus(403);
-        console.error("ERROR: Could not verify JWT");
+        console.error("ERROR: Could not verify JWT", err);
         return;
       }
       next();
