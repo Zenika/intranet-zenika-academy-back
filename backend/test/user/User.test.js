@@ -8,9 +8,8 @@ describe("Test User Controller Api call", () => {
   let testStudentUserId = "";
   let testStudentUserRole = 0;
 
-  it('Get all Users (fail)', async (done) => {
-    await httpMethod.get('/api/user')
-      .expect(404);
+  it("Get all Users (fail)", async done => {
+    await httpMethod.get("/api/user").expect(404);
     done();
   });
 

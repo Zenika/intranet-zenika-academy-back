@@ -3,7 +3,7 @@ import Axios from "axios";
 import { shallow } from "enzyme";
 import PromoData from "./PromoData";
 
-jest.mock('axios', () => {
+jest.mock("axios", () => {
   const data = {
     data: {
       users: [

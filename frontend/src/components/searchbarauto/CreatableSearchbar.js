@@ -11,7 +11,7 @@ class CreatableSearchbar extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      optionsToSave: props.options,
+      optionsToSave: props.options
     };
   }
 
