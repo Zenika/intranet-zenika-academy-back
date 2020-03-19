@@ -1,16 +1,19 @@
+const { promisify } = require("utils");
 const jwt = require('jsonwebtoken');
 
-const createJwt = (user, callback) => {
-  jwt.sign(
+const sign = promisify(jwt.sign);
+const verify = promisify(jwt.verify);
+
+const createJwt = (user) => {
+  return sign(
     user,
     process.env.JWT_SECRET || "",
-    {},
-    callback
+    {}
   );
 };
 
-const verifyJwt = (token, callback) => {
-  jwt.verify(token, process.env.JWT_SECRET || "", {}, callback);
+const verifyJwt = (token) => {
+  return verify(token, process.env.JWT_SECRET || "", {});
 };
 
 module.exports = {
