@@ -19,11 +19,9 @@ exports[`Component PromoData it renders correctly 1`] = `
         <h2
           className="subtitle is-3"
         >
-          à
-           
+          à 
           Paris
-           
-          du
+           du
            
           <t
             ago={false}
@@ -45,8 +43,7 @@ exports[`Component PromoData it renders correctly 1`] = `
           >
             2020-10-19T00:00:00.000Z
           </t>
-           
-          au
+           au
            
           <t
             ago={false}

@@ -31,6 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll",
     "test:ci": "npm test -- --watchAll=false",
+    "test:update": "npm test -- -u",
     "eject": "react-scripts eject",
     "lint": "eslint ./src/**/*.js",
     "coverage": "npm test -- --coverage",
