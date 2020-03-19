@@ -78,7 +78,7 @@ module.exports = {
       if (!allowedUser) throw new Error('wrong credentials');
       createJwt({ role: foundUser.role, email: foundUser.email, promoId: foundUser.promotionId }, (err, token) => {
         if(err) {
-          console.error(err);
+          console.error('Error creating JWT', err);
           res.status(500).send({message: err.message})
           return;
         }
