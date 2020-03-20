@@ -17,7 +17,6 @@ class AdminHome extends Component {
   componentDidMount() {
     this._isMounted = true;
     document.title = "Page d'accueil Admin";
-    const token = sessionStorage.getItem('token');
     axios.get('/api/promotions').then((res) => {
       const promotions = res.data;
       if (this._isMounted) {

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 const bcrypt = require('bcryptjs');
 const httpMethod = require('../testApiMethodService');
 const { Users } = require('../../src/models');
@@ -36,25 +35,17 @@ describe('Test User Controller Api call', () => {
   });
 
   it('Creates an user, signin, call a protected route', async (done) => {
-    const createdUserResponse = await httpMethod.post('/api/users', token, {
+    await httpMethod.post('/api/users', token, {
       email: exampleUser.email,
       role: 'admin',
       firstName: exampleUser.firstName,
       lastName: exampleUser.lastName,
-    });
-    if (!createdUserResponse.ok) {
-      console.error(createdUserResponse.error);
-      fail(createdUserResponse.error.message);
-    }
+    }).expect(201);
     const signinResponse = await httpMethod.post(
       '/api/users/signin',
       undefined,
       { email: exampleUser.email, password: exampleUser.password },
-    );
-    if (!signinResponse.ok) {
-      console.error(signinResponse.error);
-      fail(signinResponse.error.message);
-    }
+    ).expect(200);
     const signin = signinResponse.body;
     console.log('signin', signin);
     await httpMethod.get('/api/users', token).expect(200);
