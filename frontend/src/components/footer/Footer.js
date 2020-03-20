@@ -1,9 +1,9 @@
-import React from "react";
-import "./Footer.scss";
-import Linkedin from "./linkedin.png";
-import Twitter from "./twitter.png";
-import Youtube from "./youtube.png";
-import Github from "./github.png";
+import React from 'react';
+import './Footer.scss';
+import Linkedin from './linkedin.png';
+import Twitter from './twitter.png';
+import Youtube from './youtube.png';
+import Github from './github.png';
 
 const Footer = () => (
   <article className="content has-text-centered">

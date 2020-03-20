@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const update = Joi.object({
   firstName: Joi.string(),
@@ -7,7 +7,7 @@ const update = Joi.object({
 
   email: Joi.string(),
 
-  role: Joi.number()
+  role: Joi.number(),
 }).required();
 
 module.exports = update;

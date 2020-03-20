@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import CreatableSelect from "react-select/creatable";
+import React, { Component } from 'react';
+import CreatableSelect from 'react-select/creatable';
 
-const createOption = label => ({
+const createOption = (label) => ({
   label,
-  value: label.toLowerCase().replace(/\W/g, "")
+  value: label.toLowerCase().replace(/\W/g, ''),
 });
 
 class CreatableSearchbar extends Component {
@@ -11,11 +11,11 @@ class CreatableSearchbar extends Component {
     super(props);
     this.state = {
       isLoading: false,
-      optionsToSave: props.options
+      optionsToSave: props.options,
     };
   }
 
-  handleCreate = inputValue => {
+  handleCreate = (inputValue) => {
     this.setState({ isLoading: true });
     setTimeout(() => {
       const { optionsToSave } = this.state;
@@ -23,7 +23,7 @@ class CreatableSearchbar extends Component {
       optionsToSave.push(newOption);
       this.setState({
         isLoading: false,
-        optionsToSave
+        optionsToSave,
       });
     }, 1000);
   };
@@ -35,7 +35,7 @@ class CreatableSearchbar extends Component {
       handleChange,
       isMulti,
       name,
-      defaultLabel
+      defaultLabel,
     } = this.props;
     const { isLoading } = this.state;
     return (
@@ -44,8 +44,8 @@ class CreatableSearchbar extends Component {
         isCreatable
         name={name}
         defaultValue={defaultValue}
-        onChange={e => handleChange(e)}
-        formatCreateLabel={inputValue =>
+        onChange={(e) => handleChange(e)}
+        formatCreateLabel={(inputValue) =>
           `Créer un nouveau  ${defaultLabel} : ${inputValue}`
         }
         placeholder={defaultLabel}

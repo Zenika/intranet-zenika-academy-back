@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import CsvPicker from "../csvPicker/CsvPicker";
-import "./PromoCreate.scss";
-import { BulmaSteps } from "../bulma-steps/BulmaSteps";
+import React, { Component } from 'react';
+import CsvPicker from '../csvPicker/CsvPicker';
+import './PromoCreate.scss';
+import { BulmaSteps } from '../bulma-steps/BulmaSteps';
 
 export class PromoCreateStepFour extends Component {
   render() {
@@ -12,7 +12,7 @@ export class PromoCreateStepFour extends Component {
       handleCSVImport,
       name,
       promo,
-      edit
+      edit,
     } = this.props;
     const selected = !!(promo.students.length && promo.students.length > 0);
 
@@ -45,7 +45,7 @@ export class PromoCreateStepFour extends Component {
       <div className="promoCreateForm">
         <article className="section box">
           <h1 className="title is-2 is-spaced">{`${
-            edit ? "Edition" : "Création"
+            edit ? 'Edition' : 'Création'
           } d'une promo`}</h1>
           <BulmaSteps step={step} />
           <section className="control">

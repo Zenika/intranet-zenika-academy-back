@@ -1,31 +1,31 @@
-import React from "react";
-import Axios from "axios";
-import { Redirect } from "react-router-dom";
-import "./Program.scss";
-import "../layout/Layout.scss";
+import React from 'react';
+import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import './Program.scss';
+import '../layout/Layout.scss';
 
 class RecapProgramForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirectToReferrer: false
+      redirectToReferrer: false,
     };
   }
 
-  createProgram = e => {
+  createProgram = (e) => {
     e.preventDefault();
     const { program } = this.props;
-    Axios.post("http://localhost:4000/api/programs", program).then(() =>
-      this.setState(() => ({ redirectToReferrer: true }))
+    Axios.post('http://localhost:4000/api/programs', program).then(() =>
+      this.setState(() => ({ redirectToReferrer: true })),
     );
   };
 
-  editProgram = e => {
+  editProgram = (e) => {
     e.preventDefault();
     const { program } = this.props;
     Axios.put(
       `http://localhost:4000/api/programs/${program.id}/update`,
-      program
+      program,
     ).then(() => this.setState(() => ({ redirectToReferrer: true })));
   };
 
@@ -127,7 +127,7 @@ class RecapProgramForm extends React.Component {
               className="button is-info"
               id="modifyButton"
               value={0}
-              onClick={e => handleChange(e, program)}
+              onClick={(e) => handleChange(e, program)}
               type="button"
             >
               Modifier

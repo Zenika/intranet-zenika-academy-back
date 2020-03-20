@@ -1,11 +1,11 @@
-const update = require("./updateSchema");
-const create = require("./createSchema");
-const signIn = require("./signInSchema");
+const update = require('./updateSchema');
+const create = require('./createSchema');
+const signIn = require('./signInSchema');
 
 const userSchemas = {
   update,
   create,
-  signIn
+  signIn,
 };
 
 module.exports = userSchemas;

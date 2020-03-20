@@ -1,8 +1,8 @@
-import React from "react";
-import bulmaCollapsible from "@creativebulma/bulma-collapsible";
-import Sequence from "./AddSequence";
-import "./Program.scss";
-import "../layout/Layout.scss";
+import React from 'react';
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
+import Sequence from './AddSequence';
+import './Program.scss';
+import '../layout/Layout.scss';
 
 class AddSubModule extends React.Component {
   constructor(props) {
@@ -12,21 +12,21 @@ class AddSubModule extends React.Component {
       title: props.title,
       sequences: [],
       subModule: {
-        title: "",
+        title: '',
         type: 3,
-        content: props.content
+        content: props.content,
       },
-      idSequence: 0
+      idSequence: 0,
     };
     this.addSequence = this.addSequence.bind(this);
   }
 
   componentDidMount() {
-    this.collapsibles = bulmaCollapsible.attach(".is-collapsible", {
+    this.collapsibles = bulmaCollapsible.attach('.is-collapsible', {
       // eslint-disable-next-line react/no-string-refs
       container: this.refs.collapsibles,
       collapsed: false,
-      allowMultiple: true
+      allowMultiple: true,
     });
 
     const { subModule } = this.state;
@@ -38,12 +38,12 @@ class AddSubModule extends React.Component {
           .substring(2, 15) +
         Math.random()
           .toString(36)
-          .substring(2, 15)
+          .substring(2, 15),
     }));
-    this.setState(prev => ({
+    this.setState((prev) => ({
       prev,
       sequences: createSequences,
-      idSequence: createSequences.length
+      idSequence: createSequences.length,
     }));
   }
 
@@ -60,9 +60,9 @@ class AddSubModule extends React.Component {
     return null;
   }
 
-  handleChange = async e => {
+  handleChange = async (e) => {
     const { value, id } = e.target;
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const newItems = [...prevState.subModule.content];
       newItems[id].title = value;
       return { subModule: { ...prevState.subModule, content: newItems } };
@@ -70,12 +70,12 @@ class AddSubModule extends React.Component {
   };
 
   deleteSequence = async (key, id) => {
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const newId = prevState.idSequence > 0 ? prevState.idSequence - 1 : 0;
       const newItems = prevState.subModule.content;
       newItems.splice(id, 1);
       const newSequenceArray = prevState.sequences.filter(
-        node => node.key !== key
+        (node) => node.key !== key,
       );
       newSequenceArray.forEach((node, index) => {
         newSequenceArray[index].id = index;
@@ -83,7 +83,7 @@ class AddSubModule extends React.Component {
       return {
         sequences: newSequenceArray,
         subModule: { ...prevState.subModule, content: newItems },
-        idSequence: newId
+        idSequence: newId,
       };
     });
   };
@@ -99,29 +99,29 @@ class AddSubModule extends React.Component {
         .substring(2, 15);
     const newSequence = {
       id: idSequence,
-      key
+      key,
     };
-    await this.setState(prevState => ({
+    await this.setState((prevState) => ({
       ...prevState,
       subModule: {
         ...prevState.subModule,
         content: [
           ...prevState.subModule.content,
-          { title: "", type: 4, content: [] }
-        ]
-      }
+          { title: '', type: 4, content: [] },
+        ],
+      },
     }));
     await this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
         sequences: [...prevState.sequences, newSequence],
-        idSequence: prevState.idSequence + 1
+        idSequence: prevState.idSequence + 1,
       }),
       () => {
         const { handleAddSequenceContent, idModule, id } = this.props;
         const { subModule } = this.state;
         handleAddSequenceContent(subModule.content[idSequence], id, idModule);
-      }
+      },
     );
   };
 
@@ -170,7 +170,7 @@ class AddSubModule extends React.Component {
                       type="text"
                       placeholder="Nom du sous-module"
                       defaultValue={title}
-                      onChange={e => handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                     />
                   </label>
                 </div>
@@ -202,7 +202,7 @@ class AddSubModule extends React.Component {
           </div>
         </div>
         <div className="field">
-          {sequences.map(node => (
+          {sequences.map((node) => (
             <Sequence
               id={node.id}
               key={node.key}

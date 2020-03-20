@@ -1,7 +1,7 @@
-import React from "react";
-import { BulmaSteps } from "../bulma-steps/BulmaSteps";
-import DatePicker from "../datepicker/DatePicker";
-import "./PromoCreate.scss";
+import React from 'react';
+import { BulmaSteps } from '../bulma-steps/BulmaSteps';
+import DatePicker from '../datepicker/DatePicker';
+import './PromoCreate.scss';
 
 function PromoCreateStepOne(props) {
   const { nextStep, step, handleChange, promo, edit } = props;
@@ -35,7 +35,7 @@ function PromoCreateStepOne(props) {
     <div className="promoCreateForm">
       <article className="div box">
         <h1 className="title is-2 is-spaced">{`${
-          edit ? "Edition" : "Création"
+          edit ? 'Edition' : 'Création'
         } d'une promo`}</h1>
         <BulmaSteps step={step} />
         <div className="control">
@@ -46,7 +46,7 @@ function PromoCreateStepOne(props) {
               className="input "
               name="title"
               defaultValue={promo.title}
-              onChange={e => handleChange(e)}
+              onChange={(e) => handleChange(e)}
               type="text"
               placeholder="Promo"
             />
@@ -59,7 +59,7 @@ function PromoCreateStepOne(props) {
               date={promo.startDate}
               name="startDate"
               defaultValue={promo.startDate}
-              handleChange={e => handleChange(e)}
+              handleChange={(e) => handleChange(e)}
             />
           </div>
           <div className="control">
@@ -68,7 +68,7 @@ function PromoCreateStepOne(props) {
               date={promo.endDate}
               name="endDate"
               defaultValue={promo.endDate}
-              handleChange={e => handleChange(e)}
+              handleChange={(e) => handleChange(e)}
             />
           </div>
         </div>
@@ -82,7 +82,7 @@ function PromoCreateStepOne(props) {
                 className="input"
                 defaultValue={promo.city}
                 name="city"
-                onChange={e => handleChange(e)}
+                onChange={(e) => handleChange(e)}
                 placeholder="Ville"
               />
             </div>

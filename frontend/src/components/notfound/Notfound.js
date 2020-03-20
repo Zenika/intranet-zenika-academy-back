@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import notfound from "./notfound.png";
-import "./notfound.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import notfound from './notfound.png';
+import './notfound.scss';
 
 const Notfound = () => (
   <div className="container-404">

@@ -1,45 +1,45 @@
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define(
-    "Users",
+    'Users',
     {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
       },
       firstName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
       },
       role: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
       },
       promotionId: {
         type: DataTypes.INTEGER,
-        allowNull: true
-      }
+        allowNull: true,
+      },
     },
     {
       classMethods: {
         associate(models) {
-          Users.hasOne(models.Promotions, { foreignKey: "promotionId" });
-        }
-      }
-    }
+          Users.hasOne(models.Promotions, { foreignKey: 'promotionId' });
+        },
+      },
+    },
   );
 
   return Users;

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class DatePicker extends Component {
   render() {
@@ -8,7 +8,7 @@ class DatePicker extends Component {
         <input
           id={name}
           type="date"
-          onChange={e => handleChange(e)}
+          onChange={(e) => handleChange(e)}
           defaultValue={defaultValue}
           name={name}
         />

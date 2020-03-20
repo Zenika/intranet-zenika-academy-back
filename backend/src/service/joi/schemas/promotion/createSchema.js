@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const create = Joi.object({
   title: Joi.string()
@@ -19,7 +19,7 @@ const create = Joi.object({
 
   endDate: Joi.string()
     .alphanum()
-    .required()
+    .required(),
 }).required();
 
 module.exports = create;

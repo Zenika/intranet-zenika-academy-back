@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const update = Joi.object({
   id: Joi.number()
@@ -9,7 +9,7 @@ const update = Joi.object({
 
   link: Joi.string().alphanum(),
 
-  description: Joi.string().alphanum()
+  description: Joi.string().alphanum(),
 }).required();
 
 module.exports = update;

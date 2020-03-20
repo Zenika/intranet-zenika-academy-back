@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import Axios from "axios";
-import Moment from "react-moment";
-import "./PromoData.scss";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import Axios from 'axios';
+import Moment from 'react-moment';
+import './PromoData.scss';
 
 class PromoDetails extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class PromoDetails extends Component {
       promotion: {},
       isAdmin: false,
       redirectToAdmin: false,
-      redirectToPromoEdit: false
+      redirectToPromoEdit: false,
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
@@ -22,21 +22,21 @@ class PromoDetails extends Component {
   }
 
   componentDidMount() {
-    document.title = "Détails de la promo";
-    const role = sessionStorage.getItem("userRole");
+    document.title = 'Détails de la promo';
+    const role = sessionStorage.getItem('userRole');
     if (JSON.parse(role) === 1) {
       this.setState({ isAdmin: true });
     }
     const { match } = this.props;
     const url = `http://localhost:4000/api/promotions/details/${parseInt(
       match.params.id,
-      10
+      10,
     )}`;
-    Axios.get(url).then(result => {
+    Axios.get(url).then((result) => {
       this.setState({
         users: result.data.users,
         program: result.data.program,
-        promotion: result.data.promotion
+        promotion: result.data.promotion,
       });
     });
   }
@@ -50,12 +50,12 @@ class PromoDetails extends Component {
   handleDelete(id) {
     const url = `http://localhost:4000/api/promotions/${id}`;
     // eslint-disable-next-line no-restricted-globals,no-alert
-    if (confirm("Voulez vous supprimer cette promotion?")) {
+    if (confirm('Voulez vous supprimer cette promotion?')) {
       Axios.delete(url)
         .then(() => {
           this.setState({ redirectToAdmin: true });
         })
-        .catch(err => err);
+        .catch((err) => err);
     }
   }
 
@@ -72,7 +72,7 @@ class PromoDetails extends Component {
    * @param {*} id Promo Id
    */
   handleDeleteEnterKey(e, id) {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       return this.handleDelete(id);
     }
     return false;
@@ -89,12 +89,12 @@ class PromoDetails extends Component {
       promotion,
       redirectToAdmin,
       isAdmin,
-      redirectToPromoEdit
+      redirectToPromoEdit,
     } = this.state;
     const { handleDeleteClick, handleDeleteEnterKey, goToPromoEdit } = this;
-    const teachers = users.filter(user => user.role === 2);
-    const students = users.filter(user => user.role === 3);
-    const programTitle = program ? program.title : "Pas de programme associé";
+    const teachers = users.filter((user) => user.role === 2);
+    const students = users.filter((user) => user.role === 3);
+    const programTitle = program ? program.title : 'Pas de programme associé';
     const detailLink = program ? (
       <a
         href={`/program/${program.id}/details`}
@@ -115,7 +115,7 @@ class PromoDetails extends Component {
         <Redirect
           to={{
             pathname: path,
-            data: { teachers, students, promotion }
+            data: { teachers, students, promotion },
           }}
         />
       );
@@ -127,8 +127,8 @@ class PromoDetails extends Component {
             <div className="promoInfo">
               <h1 className="title is-1 promoTitle">{promotion.title}</h1>
               <h2 className="subtitle is-3">
-                à {promotion.city} du{" "}
-                <Moment format="DD/MM/YYYY">{promotion.startDate}</Moment> au{" "}
+                à {promotion.city} du{' '}
+                <Moment format="DD/MM/YYYY">{promotion.startDate}</Moment> au{' '}
                 <Moment format="DD/MM/YYYY">{promotion.endDate}</Moment>
               </h2>
             </div>
@@ -165,7 +165,7 @@ class PromoDetails extends Component {
             <div className="notification">
               <h3 className="title is-3">Formateurs</h3>
               <ul className="promoTeachers">
-                {teachers.map(teacher => (
+                {teachers.map((teacher) => (
                   <li
                     key={`teacher-${teacher.id}`}
                   >{`${teacher.firstName} ${teacher.lastName}`}</li>
@@ -177,7 +177,7 @@ class PromoDetails extends Component {
             <div className="notification">
               <h3 className="title is-3">Elèves</h3>
               <ul className="promoStudents">
-                {students.map(student => (
+                {students.map((student) => (
                   <li
                     key={`student-${student.id}`}
                   >{`${student.firstName} ${student.lastName}`}</li>

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "./CsvPicker.scss";
+import React, { Component } from 'react';
+import './CsvPicker.scss';
 
 class CsvPickerButton extends Component {
   handleClick = () => {
-    const csvPicker = document.getElementsByClassName("csv-input");
+    const csvPicker = document.getElementsByClassName('csv-input');
     csvPicker[0].click();
   };
 
@@ -16,7 +16,7 @@ class CsvPickerButton extends Component {
           className="button csvButton"
           onClick={this.handleClick}
         >
-          {selected ? "Fichier importé !" : "Choisir un fichier csv"}
+          {selected ? 'Fichier importé !' : 'Choisir un fichier csv'}
         </button>
       </>
     );

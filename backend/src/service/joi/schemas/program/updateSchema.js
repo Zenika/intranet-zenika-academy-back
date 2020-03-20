@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const update = Joi.object({
   id: Joi.number()
@@ -15,7 +15,7 @@ const update = Joi.object({
 
   updatedAt: Joi.string(),
 
-  createdAt: Joi.string()
+  createdAt: Joi.string(),
 }).required();
 
 module.exports = update;

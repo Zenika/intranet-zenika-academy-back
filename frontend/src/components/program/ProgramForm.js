@@ -1,7 +1,7 @@
-import React from "react";
-import Module from "./AddModule";
-import "./Program.scss";
-import "../layout/Layout.scss";
+import React from 'react';
+import Module from './AddModule';
+import './Program.scss';
+import '../layout/Layout.scss';
 
 class ProgramForm extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class ProgramForm extends React.Component {
     this.state = {
       modules: [],
       program: props.program,
-      idModules: 0
+      idModules: 0,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -18,54 +18,54 @@ class ProgramForm extends React.Component {
     this.generateModule();
   }
 
-  handleChangeTitleProgram = e => {
+  handleChangeTitleProgram = (e) => {
     const { value } = e.target;
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       ...prevState,
       program: {
         ...prevState.program,
-        title: value
-      }
+        title: value,
+      },
     }));
   };
 
-  handleChange = async e => {
+  handleChange = async (e) => {
     const { value, id } = e.target;
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const newItems = [...prevState.program.content];
       newItems[id].title = value;
       return {
         program: {
           ...prevState.program,
-          content: newItems
-        }
+          content: newItems,
+        },
       };
     });
   };
 
   handleAddSubModuleContent = async (value, idModule) => {
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const newItems = [...prevState.program.content];
       newItems[idModule].content.push(value);
       return {
         program: {
           ...prevState.program,
-          content: newItems
-        }
+          content: newItems,
+        },
       };
     });
     return true;
   };
 
   handleAddSequenceContent = async (value, idSubModule, idModule) => {
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const moduleContent = [...prevState.program.content];
       moduleContent[idModule].content[idSubModule].content.push(value);
       return {
         program: {
           ...prevState.program,
-          content: moduleContent
-        }
+          content: moduleContent,
+        },
       };
     });
     return true;
@@ -75,11 +75,11 @@ class ProgramForm extends React.Component {
     this.setState(() => ({
       modules: [],
       program: {
-        title: "",
+        title: '',
         type: 1,
-        content: []
+        content: [],
       },
-      idModules: 0
+      idModules: 0,
     }));
   };
 
@@ -94,42 +94,42 @@ class ProgramForm extends React.Component {
         .substring(2, 15);
     const newModule = {
       id: idModules,
-      key
+      key,
     };
-    await this.setState(prevState => ({
+    await this.setState((prevState) => ({
       ...prevState,
       program: {
         ...prevState.program,
         content: [
           ...prevState.program.content,
           {
-            title: "",
+            title: '',
             type: 2,
-            content: []
-          }
-        ]
-      }
+            content: [],
+          },
+        ],
+      },
     }));
     await this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
         modules: [...prevState.modules, newModule],
-        idModules: prevState.idModules + 1
+        idModules: prevState.idModules + 1,
       }),
       () => {
         this.forceUpdate();
-      }
+      },
     );
   };
 
   deleteModule = async (key, id) => {
     await this.setState(
-      prevState => {
+      (prevState) => {
         const newId = prevState.idModules > 0 ? prevState.idModules - 1 : 0;
         const newItems = [...prevState.program.content];
         newItems.splice(id, 1);
         const newModuleArray = prevState.modules.filter(
-          node => node.key !== key
+          (node) => node.key !== key,
         );
         newModuleArray.forEach((node, index) => {
           newModuleArray[index].id = index;
@@ -137,12 +137,12 @@ class ProgramForm extends React.Component {
         return {
           idModules: newId,
           modules: newModuleArray,
-          program: { ...prevState.program, content: newItems }
+          program: { ...prevState.program, content: newItems },
         };
       },
       () => {
         this.forceUpdate();
-      }
+      },
     );
   };
 
@@ -157,12 +157,12 @@ class ProgramForm extends React.Component {
             .substring(2, 15) +
           Math.random()
             .toString(36)
-            .substring(2, 15)
+            .substring(2, 15),
       }));
-      this.setState(prev => ({
+      this.setState((prev) => ({
         prev,
         modules: createModules,
-        idModules: createModules.length
+        idModules: createModules.length,
       }));
     }
   }
@@ -188,7 +188,7 @@ class ProgramForm extends React.Component {
             className="button is-success"
             id="validateProgramForm"
             value={1}
-            onClick={e => handleChange(e, program)}
+            onClick={(e) => handleChange(e, program)}
             type="button"
           >
             Valider
@@ -229,7 +229,7 @@ class ProgramForm extends React.Component {
                     id="programTitle"
                     placeholder="Nom du programme"
                     value={program.title}
-                    onChange={e => this.handleChangeTitleProgram(e)}
+                    onChange={(e) => this.handleChangeTitleProgram(e)}
                   />
                 </label>
               </div>
@@ -261,7 +261,7 @@ class ProgramForm extends React.Component {
           </div>
 
           <div className="field">
-            {modules.map(node => (
+            {modules.map((node) => (
               <Module
                 id={node.id}
                 key={node.key}

@@ -1,49 +1,49 @@
-import React, { Component } from "react";
-import Axios from "axios";
-import PromoCreateStepOne from "./PromoCreateStepOne";
-import { PromoCreateStepTwo } from "./PromoCreateStepTwo";
-import { PromoCreateStepThree } from "./PromoCreateStepThree";
-import { PromoCreateStepFour } from "./PromoCreateStepFour";
-import PromoCreateResume from "./PromoCreateResume";
+import React, { Component } from 'react';
+import Axios from 'axios';
+import PromoCreateStepOne from './PromoCreateStepOne';
+import { PromoCreateStepTwo } from './PromoCreateStepTwo';
+import { PromoCreateStepThree } from './PromoCreateStepThree';
+import { PromoCreateStepFour } from './PromoCreateStepFour';
+import PromoCreateResume from './PromoCreateResume';
 
 export class PromoCreateContainer extends Component {
   constructor() {
     super();
     this.state = {
       step: 1,
-      title: "",
-      startDate: "",
-      endDate: "",
+      title: '',
+      startDate: '',
+      endDate: '',
       students: [],
       teachers: [],
       program: [],
-      country: "",
-      city: "",
+      country: '',
+      city: '',
       csv: false,
       edit: false,
-      promoId: 0
+      promoId: 0,
     };
   }
 
   componentDidMount() {
     const { match } = this.props;
-    document.title = "Création de promotion";
-    if (window.location.toString().indexOf("edit") !== -1) {
-      document.title = "Edition de promotion";
+    document.title = 'Création de promotion';
+    if (window.location.toString().indexOf('edit') !== -1) {
+      document.title = 'Edition de promotion';
       const { id } = match.params;
       const url = `http://localhost:4000/api/promotions/details/${parseInt(
         id,
-        10
+        10,
       )}`;
-      Axios.get(url).then(result => {
+      Axios.get(url).then((result) => {
         const { users, promotion, program } = result.data;
-        users.forEach(user => {
+        users.forEach((user) => {
           if (user.role === 2) {
             const obj = {
               label: `${user.firstName} ${user.lastName}`,
-              value: user.id
+              value: user.id,
             };
-            this.setState(state => {
+            this.setState((state) => {
               const teacherList = state.teachers.push(obj);
               return teacherList;
             });
@@ -53,9 +53,9 @@ export class PromoCreateContainer extends Component {
               firstName: user.firstName,
               lastName: user.lastName,
               email: user.email,
-              role: "student"
+              role: 'student',
             };
-            this.setState(state => {
+            this.setState((state) => {
               const studentList = state.students.push(obj);
               return studentList;
             });
@@ -68,10 +68,10 @@ export class PromoCreateContainer extends Component {
           city: promotion.city,
           startDate: promotion.startDate.substr(
             0,
-            promotion.startDate.indexOf("T")
+            promotion.startDate.indexOf('T'),
           ),
-          endDate: promotion.endDate.substr(0, promotion.endDate.indexOf("T")),
-          program: [{ label: program.title, value: program.id }]
+          endDate: promotion.endDate.substr(0, promotion.endDate.indexOf('T')),
+          program: [{ label: program.title, value: program.id }],
         });
       });
     }
@@ -81,7 +81,7 @@ export class PromoCreateContainer extends Component {
    * Allows to handle state change in promo form
    * @param e event from wich data are coming from
    */
-  handleChange = e => {
+  handleChange = (e) => {
     const { name, value } = e.target;
     return this.setState({ [name]: value });
   };
@@ -92,7 +92,7 @@ export class PromoCreateContainer extends Component {
    * @param name name of the state to update
    */
   handleMultiChange = (options, name) => {
-    if (name === "program") {
+    if (name === 'program') {
       return this.setState({ [name]: [options] });
     }
     return this.setState({ [name]: options });
@@ -136,7 +136,7 @@ export class PromoCreateContainer extends Component {
       city,
       csv,
       edit,
-      promoId
+      promoId,
     } = this.state;
     const promo = {
       title,
@@ -147,14 +147,14 @@ export class PromoCreateContainer extends Component {
       program,
       country,
       city,
-      promoId
+      promoId,
     };
     const {
       nextStep,
       prevStep,
       handleChange,
       handleMultiChange,
-      handleCSVImport
+      handleCSVImport,
     } = this;
 
     switch (step) {

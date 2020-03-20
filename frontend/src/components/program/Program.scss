@@ -1,12 +1,12 @@
-[id^="moduleBox"] {
+[id^='moduleBox'] {
   background-color: #f0f8ff;
 }
 
-[id^="subModuleBox"] {
+[id^='subModuleBox'] {
   background-color: #f8f8ff;
 }
 
-[id^="sequenceBox"] {
+[id^='sequenceBox'] {
   background-color: #f5f5f5;
 }
 
@@ -14,8 +14,8 @@
   display: flow-root;
 }
 
-[id^="add"],
-[id^="delete"],
+[id^='add'],
+[id^='delete'],
 #clearProgram {
   padding: 0;
 }

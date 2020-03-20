@@ -1,23 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-  const RssFeeds = sequelize.define("RssFeeds", {
+  const RssFeeds = sequelize.define('RssFeeds', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     title: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     link: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });
 
   return RssFeeds;

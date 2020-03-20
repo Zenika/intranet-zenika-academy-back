@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "../app/index.scss";
-import "../app/App.scss";
+import React, { Component } from 'react';
+import '../app/index.scss';
+import '../app/App.scss';
 
 class Home extends Component {
   componentDidMount() {

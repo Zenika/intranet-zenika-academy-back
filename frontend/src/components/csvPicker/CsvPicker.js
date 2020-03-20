@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import CSVReader from "react-csv-reader";
-import CsvPickerButton from "./CsvPickerButton";
-import "./CsvPicker.scss";
+import React, { Component } from 'react';
+import CSVReader from 'react-csv-reader';
+import CsvPickerButton from './CsvPickerButton';
+import './CsvPicker.scss';
 
 const papaparseOptions = {
   header: true,
   dynamicTyping: true,
   skipEmptyLines: true,
-  encoding: "UTF-8"
+  encoding: 'UTF-8',
 };
 
 export default class CsvPicker extends Component {
@@ -29,7 +29,7 @@ export default class CsvPicker extends Component {
           id="csvPicker"
           name={name}
           parserOptions={papaparseOptions}
-          onFileLoaded={e => this.onDataImport(e)}
+          onFileLoaded={(e) => this.onDataImport(e)}
         />
         <div className="csvPickerControls">
           <CsvPickerButton selected={selected} />

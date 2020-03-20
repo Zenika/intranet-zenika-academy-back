@@ -1,9 +1,9 @@
-import React from "react";
-import Axios from "axios";
-import "./Program.scss";
-import "../layout/Layout.scss";
-import ProgramForm from "./ProgramForm";
-import RecapProgramForm from "./RecapProgramForm";
+import React from 'react';
+import Axios from 'axios';
+import './Program.scss';
+import '../layout/Layout.scss';
+import ProgramForm from './ProgramForm';
+import RecapProgramForm from './RecapProgramForm';
 
 class ProgramFormContainer extends React.Component {
   constructor(props) {
@@ -12,10 +12,10 @@ class ProgramFormContainer extends React.Component {
       step: -1,
       edit: 0,
       program: {
-        title: "",
+        title: '',
         type: 1,
-        content: []
-      }
+        content: [],
+      },
     };
   }
 
@@ -24,22 +24,22 @@ class ProgramFormContainer extends React.Component {
     if (match.params.id) {
       const url = `http://localhost:4000/api/programs/${parseInt(
         match.params.id,
-        10
+        10,
       )}/details`;
-      return Axios.get(url).then(result => {
-        document.title = "Admin / Programme édition";
+      return Axios.get(url).then((result) => {
+        document.title = 'Admin / Programme édition';
         this.setState(
           {
             program: result.data,
             step: 0,
-            edit: 1
+            edit: 1,
           },
-          () => this.forceUpdate()
+          () => this.forceUpdate(),
         );
       });
     }
     this.setState({ step: 0 });
-    document.title = "Admin / Programme création";
+    document.title = 'Admin / Programme création';
     return true;
   }
 

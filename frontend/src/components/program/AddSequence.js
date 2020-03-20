@@ -1,23 +1,23 @@
-import React from "react";
-import bulmaCollapsible from "@creativebulma/bulma-collapsible";
-import "./Program.scss";
-import "../layout/Layout.scss";
+import React from 'react';
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
+import './Program.scss';
+import '../layout/Layout.scss';
 
 class AddSequence extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       id: props.id,
-      title: props.title
+      title: props.title,
     };
   }
 
   componentDidMount() {
-    this.collapsibles = bulmaCollapsible.attach(".is-collapsible", {
+    this.collapsibles = bulmaCollapsible.attach('.is-collapsible', {
       // eslint-disable-next-line react/no-string-refs
       container: this.refs.collapsibles,
       collapsed: false,
-      allowMultiple: true
+      allowMultiple: true,
     });
   }
 
@@ -80,7 +80,7 @@ class AddSequence extends React.Component {
                       placeholder="Nom de la séquence"
                       id={id}
                       defaultValue={title}
-                      onChange={e => handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                     />
                   </label>
                 </div>

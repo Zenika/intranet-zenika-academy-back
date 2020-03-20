@@ -1,33 +1,33 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { BulmaSteps } from "../bulma-steps/BulmaSteps";
-import CreatableSelect from "../searchbarauto/CreatableSearchbar";
-import "./PromoCreate.scss";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { BulmaSteps } from '../bulma-steps/BulmaSteps';
+import CreatableSelect from '../searchbarauto/CreatableSearchbar';
+import './PromoCreate.scss';
 
 export class PromoCreateStepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      programs: []
+      programs: [],
     };
   }
 
   componentDidMount() {
     setTimeout(() => {
       axios
-        .get("http://localhost:4000/api/programs")
-        .then(res =>
-          res.data.forEach(program => {
+        .get('http://localhost:4000/api/programs')
+        .then((res) =>
+          res.data.forEach((program) => {
             if (program.type === 1) {
               const obj = { label: program.title, value: program.id };
-              this.setState(state => {
+              this.setState((state) => {
                 const programList = state.programs.push(obj);
                 return programList;
               });
             }
-          })
+          }),
         )
-        .catch(err => err);
+        .catch((err) => err);
     }, 100);
   }
 
@@ -38,7 +38,7 @@ export class PromoCreateStepTwo extends Component {
       step,
       promo,
       handleMultiChange,
-      edit
+      edit,
     } = this.props;
     const { programs } = this.state;
 
@@ -70,7 +70,7 @@ export class PromoCreateStepTwo extends Component {
       <div className="promoCreateForm">
         <article className="section box">
           <h1 className="title is-2 is-spaced">{`${
-            edit ? "Edition" : "Création"
+            edit ? 'Edition' : 'Création'
           } d'une promo`}</h1>
           <BulmaSteps step={step} />
           <div className="control">
@@ -81,7 +81,7 @@ export class PromoCreateStepTwo extends Component {
                   defaultValue={promo.program}
                   name="program"
                   options={programs}
-                  handleChange={e => handleMultiChange(e, "program")}
+                  handleChange={(e) => handleMultiChange(e, 'program')}
                   searchKey="title"
                   defaultLabel="Programme"
                 />

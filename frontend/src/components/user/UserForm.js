@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import "./UserProfile.scss";
-import SearchbarAutoComplete from "../searchbarauto/SearchbarAuto";
+import React, { Component } from 'react';
+import './UserProfile.scss';
+import SearchbarAutoComplete from '../searchbarauto/SearchbarAuto';
 
 class UserForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: props.user
+      user: props.user,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,22 +17,22 @@ class UserForm extends Component {
     document.title = "Admin / Création d'utilisateur";
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     const { value, name } = e.target;
-    this.setState(prev => ({
+    this.setState((prev) => ({
       user: {
         ...prev.user,
-        [name]: value
-      }
+        [name]: value,
+      },
     }));
   };
 
-  handleChangeRole = e => {
-    this.setState(prev => ({
+  handleChangeRole = (e) => {
+    this.setState((prev) => ({
       user: {
         ...prev.user,
-        role: e.value
-      }
+        role: e.value,
+      },
     }));
   };
 
@@ -41,9 +41,9 @@ class UserForm extends Component {
     const { firstName, lastName, email, role } = user;
 
     const roleList = [
-      { value: "admin", label: "Administrateur" },
-      { value: "teacher", label: "Formateur" },
-      { value: "student", label: "Etudiant" }
+      { value: 'admin', label: 'Administrateur' },
+      { value: 'teacher', label: 'Formateur' },
+      { value: 'student', label: 'Etudiant' },
     ];
     const { changeStep } = this.props;
     return (

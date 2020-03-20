@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 const create = Joi.object({
   firstName: Joi.string().required(),
@@ -9,7 +9,7 @@ const create = Joi.object({
 
   promotionId: Joi.number(),
 
-  role: Joi.string().required()
+  role: Joi.string().required(),
 }).required();
 
 module.exports = create;

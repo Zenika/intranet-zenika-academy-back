@@ -1,8 +1,8 @@
-import React from "react";
-import "./UserProfile.scss";
-import "../layout/Layout.scss";
-import UserForm from "./UserForm";
-import RecapUserForm from "./RecapUserForm";
+import React from 'react';
+import './UserProfile.scss';
+import '../layout/Layout.scss';
+import UserForm from './UserForm';
+import RecapUserForm from './RecapUserForm';
 
 class UserCreateContainer extends React.Component {
   constructor(props) {
@@ -10,11 +10,11 @@ class UserCreateContainer extends React.Component {
     this.state = {
       step: 0,
       user: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        role: ""
-      }
+        firstName: '',
+        lastName: '',
+        email: '',
+        role: '',
+      },
     };
   }
 

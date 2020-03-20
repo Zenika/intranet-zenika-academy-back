@@ -1,8 +1,8 @@
-import React from "react";
-import bulmaCollapsible from "@creativebulma/bulma-collapsible";
-import SubModule from "./AddSubModule";
-import "./Program.scss";
-import "../layout/Layout.scss";
+import React from 'react';
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
+import SubModule from './AddSubModule';
+import './Program.scss';
+import '../layout/Layout.scss';
 
 class AddModule extends React.Component {
   constructor(props) {
@@ -12,21 +12,21 @@ class AddModule extends React.Component {
       title: props.title,
       subModules: [],
       module: {
-        title: "",
+        title: '',
         type: 2,
-        content: props.content
+        content: props.content,
       },
-      idSubModules: 0
+      idSubModules: 0,
     };
     this.addSubModule = this.addSubModule.bind(this);
   }
 
   componentDidMount() {
-    this.collapsibles = bulmaCollapsible.attach(".is-collapsible", {
+    this.collapsibles = bulmaCollapsible.attach('.is-collapsible', {
       // eslint-disable-next-line react/no-string-refs
       container: this.refs.collapsibles,
       collapsed: false,
-      allowMultiple: true
+      allowMultiple: true,
     });
 
     const { module } = this.state;
@@ -38,12 +38,12 @@ class AddModule extends React.Component {
           .substring(2, 15) +
         Math.random()
           .toString(36)
-          .substring(2, 15)
+          .substring(2, 15),
     }));
-    this.setState(prev => ({
+    this.setState((prev) => ({
       prev,
       subModules: createSubModules,
-      idSubModules: createSubModules.length
+      idSubModules: createSubModules.length,
     }));
   }
 
@@ -61,12 +61,12 @@ class AddModule extends React.Component {
   }
 
   deleteSubModule = async (key, id) => {
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const newId = prevState.idSubModules > 0 ? prevState.idSubModules - 1 : 0;
       const newItems = prevState.module.content;
       newItems.splice(id, 1);
       const newSequenceArray = prevState.subModules.filter(
-        node => node.key !== key
+        (node) => node.key !== key,
       );
       newSequenceArray.forEach((node, index) => {
         newSequenceArray[index].id = index;
@@ -74,7 +74,7 @@ class AddModule extends React.Component {
       return {
         subModules: newSequenceArray,
         module: { ...prevState.module, content: newItems },
-        idSubModules: newId
+        idSubModules: newId,
       };
     });
   };
@@ -91,34 +91,34 @@ class AddModule extends React.Component {
         .substring(2, 15);
     const newSubModule = {
       id: idSubModules,
-      key
+      key,
     };
-    await this.setState(prevState => ({
+    await this.setState((prevState) => ({
       ...prevState,
       module: {
         ...prevState.module,
         content: [
           ...prevState.module.content,
-          { title: "", type: 3, content: [] }
-        ]
-      }
+          { title: '', type: 3, content: [] },
+        ],
+      },
     }));
     await this.setState(
-      prevState => ({
+      (prevState) => ({
         ...prevState,
         subModules: [...prevState.subModules, newSubModule],
-        idSubModules: prevState.idSubModules + 1
+        idSubModules: prevState.idSubModules + 1,
       }),
       () => {
         const { module } = this.state;
         handleAddSubModuleContent(module.content[idSubModules], idProps);
-      }
+      },
     );
   };
 
-  handleChange = async e => {
+  handleChange = async (e) => {
     const { value, id } = e.target;
-    await this.setState(prevState => {
+    await this.setState((prevState) => {
       const newItems = [...prevState.module.content];
       newItems[id].title = value;
       return { module: { ...prevState.module, content: newItems } };
@@ -131,7 +131,7 @@ class AddModule extends React.Component {
       deleteModule,
       deleteIt,
       handleAddSequenceContent,
-      id: propsId
+      id: propsId,
     } = this.props;
     const { subModules, id, title, module } = this.state;
 
@@ -176,7 +176,7 @@ class AddModule extends React.Component {
                       type="text"
                       placeholder="Nom du module"
                       defaultValue={title}
-                      onChange={e => handleChange(e)}
+                      onChange={(e) => handleChange(e)}
                     />
                   </label>
                 </div>
@@ -208,7 +208,7 @@ class AddModule extends React.Component {
           </div>
         </div>
         <div className="field">
-          {subModules.map(node => (
+          {subModules.map((node) => (
             <SubModule
               id={node.id}
               key={node.key}

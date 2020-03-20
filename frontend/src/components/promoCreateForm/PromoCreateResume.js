@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import axios from "axios";
-import { BulmaSteps } from "../bulma-steps/BulmaSteps";
+import axios from 'axios';
+import { BulmaSteps } from '../bulma-steps/BulmaSteps';
 
-import "./PromoCreate.scss";
+import './PromoCreate.scss';
 
 class PromoCreateResume extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirectionToHome: false
+      redirectionToHome: false,
     };
     this.handleCreate = this.handleCreate.bind(this);
   }
@@ -18,9 +18,9 @@ class PromoCreateResume extends Component {
   handleCreate() {
     const { promo, edit, promoId } = this.props;
     const { teachers, students } = promo;
-    const teachersToUpsert = teachers.map(teacher => {
+    const teachersToUpsert = teachers.map((teacher) => {
       const obj = {
-        id: teacher.value
+        id: teacher.value,
       };
       return obj;
     });
@@ -29,40 +29,40 @@ class PromoCreateResume extends Component {
       city: promo.city,
       startDate: promo.startDate,
       endDate: promo.endDate,
-      programId: promo.program[0].value
+      programId: promo.program[0].value,
     };
 
     if (edit) {
       const users = {
         students,
-        teachersToUpsert
+        teachersToUpsert,
       };
       return axios
         .put(`http://localhost:4000/api/promotions/${promoId}/update`, {
           promoData,
-          users
+          users,
         })
         .then(() => {
           this.setState({ redirectionToHome: true });
         })
-        .catch(err => err);
+        .catch((err) => err);
     }
     return axios
-      .post("http://localhost:4000/api/promotions", {
+      .post('http://localhost:4000/api/promotions', {
         promoData,
-        teachersToUpsert
+        teachersToUpsert,
       })
-      .then(res => {
-        students.forEach(student => {
+      .then((res) => {
+        students.forEach((student) => {
           const newStudent = {
             ...student,
-            promotionId: res.data.id
+            promotionId: res.data.id,
           };
-          axios.post("http://localhost:4000/api/users", newStudent);
+          axios.post('http://localhost:4000/api/users', newStudent);
         });
         this.setState({ redirectionToHome: true });
       })
-      .catch(err => err);
+      .catch((err) => err);
   }
 
   render() {
@@ -71,13 +71,13 @@ class PromoCreateResume extends Component {
     const { handleCreate } = this;
 
     const startDate = promo.startDate
-      .split("-")
+      .split('-')
       .reverse()
-      .join("-");
+      .join('-');
     const endDate = promo.endDate
-      .split("-")
+      .split('-')
       .reverse()
-      .join("-");
+      .join('-');
 
     const buttonForm = (
       <section className="field buttonField">
@@ -112,7 +112,7 @@ class PromoCreateResume extends Component {
       <div className="promoCreateForm">
         <article className="section box">
           <h1 className="title is-2 is-spaced">{`${
-            edit ? "Edition" : "Création"
+            edit ? 'Edition' : 'Création'
           } d'une promo`}</h1>
           <BulmaSteps step={step} />
           <section className="field">
@@ -123,7 +123,7 @@ class PromoCreateResume extends Component {
               <label htmlFor="promoTitle" className="label">
                 Nom de la promo:
                 <section id="promoTitle" className="field">
-                  <p>{promo.title ? promo.title : ""}</p>
+                  <p>{promo.title ? promo.title : ''}</p>
                 </section>
               </label>
             </section>
@@ -135,8 +135,8 @@ class PromoCreateResume extends Component {
                   Date de début:
                   <section className="field">
                     <span>
-                      {" "}
-                      <time id="startDate">{startDate || ""}</time>{" "}
+                      {' '}
+                      <time id="startDate">{startDate || ''}</time>{' '}
                     </span>
                   </section>
                 </label>
@@ -150,8 +150,8 @@ class PromoCreateResume extends Component {
                   Date de fin:
                   <section className="field">
                     <span>
-                      {" "}
-                      <time id="endDate">{endDate || ""}</time>{" "}
+                      {' '}
+                      <time id="endDate">{endDate || ''}</time>{' '}
                     </span>
                   </section>
                 </label>
@@ -162,7 +162,7 @@ class PromoCreateResume extends Component {
             <label htmlFor="city" className="label">
               Ville:
               <section id="city" className="field">
-                <p>{promo.city !== undefined ? promo.city : ""}</p>
+                <p>{promo.city !== undefined ? promo.city : ''}</p>
               </section>
             </label>
           </section>
@@ -170,7 +170,7 @@ class PromoCreateResume extends Component {
             <label htmlFor="program" className="label">
               Programme:
               <section id="program" className="field">
-                <p>{promo.program.length ? promo.program[0].label : ""}</p>
+                <p>{promo.program.length ? promo.program[0].label : ''}</p>
               </section>
             </label>
           </section>
@@ -179,8 +179,8 @@ class PromoCreateResume extends Component {
               Formateurs:
               <section id="teachers" className="field">
                 {promo.teachers.length
-                  ? promo.teachers.map(e => <p key={e.value}>{e.label}</p>)
-                  : ""}
+                  ? promo.teachers.map((e) => <p key={e.value}>{e.label}</p>)
+                  : ''}
               </section>
             </label>
           </section>
@@ -189,12 +189,12 @@ class PromoCreateResume extends Component {
               Elèves:
               <section id="students" className="field">
                 {promo.students.length
-                  ? promo.students.map(e => (
+                  ? promo.students.map((e) => (
                       <p
                         key={e.lastName}
                       >{`${e.lastName}  ${e.firstName}  ${e.email}`}</p>
                     ))
-                  : ""}
+                  : ''}
               </section>
             </label>
           </section>

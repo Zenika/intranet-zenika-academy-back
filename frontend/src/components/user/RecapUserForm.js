@@ -1,15 +1,15 @@
-import React from "react";
-import Axios from "axios";
-import { Redirect } from "react-router-dom";
-import "./UserProfile.scss";
-import "../layout/Layout.scss";
+import React from 'react';
+import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
+import './UserProfile.scss';
+import '../layout/Layout.scss';
 
 class RecapProgramForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       user: props.user,
-      redirectToReferrer: false
+      redirectToReferrer: false,
     };
   }
 
@@ -17,20 +17,20 @@ class RecapProgramForm extends React.Component {
     document.title = "Admin / Récapitulatif création d'utilisateur";
   }
 
-  createUser = e => {
+  createUser = (e) => {
     e.preventDefault();
     const { user } = this.state;
-    Axios.post("http://localhost:4000/api/users ", user).then(() =>
-      this.setState(() => ({ redirectToReferrer: true }))
+    Axios.post('http://localhost:4000/api/users ', user).then(() =>
+      this.setState(() => ({ redirectToReferrer: true })),
     );
   };
 
   render() {
     const { user } = this.props;
     let roleDetail;
-    if (user.role === "admin") roleDetail = "Administrateur";
-    if (user.role === "teacher") roleDetail = "Formateur";
-    if (user.role === "student") roleDetail = "Eleve";
+    if (user.role === 'admin') roleDetail = 'Administrateur';
+    if (user.role === 'teacher') roleDetail = 'Formateur';
+    if (user.role === 'student') roleDetail = 'Eleve';
 
     const { redirectToReferrer } = this.state;
     if (redirectToReferrer === true) {
@@ -69,7 +69,7 @@ class RecapProgramForm extends React.Component {
             <button
               type="button"
               id="createButton"
-              onClick={e => this.createUser(e)}
+              onClick={(e) => this.createUser(e)}
               className="button is-success"
             >
               Créer

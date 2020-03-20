@@ -1,4 +1,4 @@
-const Joi = require("@hapi/joi");
+const Joi = require('@hapi/joi');
 
 module.exports = {
   joiObjectValidator: (schema, property) => (req, res, next) => {
@@ -10,20 +10,20 @@ module.exports = {
       next();
     } else {
       const { details } = error;
-      const message = details.map(i => i.message).join(",");
+      const message = details.map((i) => i.message).join(',');
 
       res.status(422).json({ error: message });
     }
   },
 
-  joiIdValidator: property => (req, res, next) => {
+  joiIdValidator: (property) => (req, res, next) => {
     const schema = Joi.object({
       id: Joi.number()
         .integer()
-        .required()
+        .required(),
     });
     const { error, value } = schema.validate({
-      id: parseInt(req.params[property], 10)
+      id: parseInt(req.params[property], 10),
     });
     const valid = error == null;
 
@@ -32,9 +32,9 @@ module.exports = {
       next();
     } else {
       const { details } = error;
-      const message = details.map(i => i.message).join(",");
+      const message = details.map((i) => i.message).join(',');
 
       res.status(422).json({ error: message });
     }
-  }
+  },
 };

@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./PromoCreate.scss";
-import { BulmaSteps } from "../bulma-steps/BulmaSteps";
-import SearchbarAutoComplete from "../searchbarauto/SearchbarAuto";
+import React, { Component } from 'react';
+import axios from 'axios';
+import './PromoCreate.scss';
+import { BulmaSteps } from '../bulma-steps/BulmaSteps';
+import SearchbarAutoComplete from '../searchbarauto/SearchbarAuto';
 
 export class PromoCreateStepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teachers: []
+      teachers: [],
     };
   }
 
@@ -16,9 +16,9 @@ export class PromoCreateStepThree extends Component {
     const { promo } = this.props;
     setTimeout(() => {
       axios
-        .get("http://localhost:4000/api/users")
-        .then(res =>
-          res.data.forEach(teacher => {
+        .get('http://localhost:4000/api/users')
+        .then((res) =>
+          res.data.forEach((teacher) => {
             /** RETRIEVE ONLY AVAILABLE OR THIS PROMO TEACHERS FOR MULTISELECT */
             if (teacher.role === 2) {
               if (
@@ -27,17 +27,17 @@ export class PromoCreateStepThree extends Component {
               ) {
                 const obj = {
                   label: `${teacher.firstName} ${teacher.lastName}`,
-                  value: teacher.id
+                  value: teacher.id,
                 };
-                this.setState(state => {
+                this.setState((state) => {
                   const teacherList = state.teachers.push(obj);
                   return teacherList;
                 });
               }
             }
-          })
+          }),
         )
-        .catch(err => err);
+        .catch((err) => err);
     }, 100);
   }
 
@@ -48,7 +48,7 @@ export class PromoCreateStepThree extends Component {
       step,
       promo,
       handleMultiChange,
-      edit
+      edit,
     } = this.props;
 
     const { teachers } = this.state;
@@ -82,7 +82,7 @@ export class PromoCreateStepThree extends Component {
       <div className="promoCreateForm">
         <article className="section box">
           <h1 className="title is-2 is-spaced">{`${
-            edit ? "Edition" : "Création"
+            edit ? 'Edition' : 'Création'
           } d'une promo`}</h1>
           <BulmaSteps step={step} />
           <section className="control">
@@ -93,7 +93,7 @@ export class PromoCreateStepThree extends Component {
                   defaultValue={promo.teachers}
                   name="teachers"
                   options={teachers}
-                  handleChange={e => handleMultiChange(e, "teachers")}
+                  handleChange={(e) => handleMultiChange(e, 'teachers')}
                   searchKey="title"
                   defaultLabel="Formateurs"
                   isMulti

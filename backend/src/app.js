@@ -1,34 +1,34 @@
-const express = require("express");
-const http = require("http");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const promotions = require("./routes/promotions");
-const users = require("./routes/users");
-const programs = require("./routes/programs");
+const express = require('express');
+const http = require('http');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const promotions = require('./routes/promotions');
+const users = require('./routes/users');
+const programs = require('./routes/programs');
 
-const port = process.env.PORT || "4000";
+const port = process.env.PORT || '4000';
 const app = express();
 
 app.use(cors());
-app.set("view engine", "pug");
+app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
   );
   next();
 });
 
-app.use("/api/users", users);
-app.use("/api/programs", programs);
-app.use("/api/promotions", promotions);
+app.use('/api/users', users);
+app.use('/api/programs', programs);
+app.use('/api/promotions', promotions);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  const err = new Error("Not Found");
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
