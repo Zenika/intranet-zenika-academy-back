@@ -8,8 +8,7 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier"
+    "plugin:react/recommended"
   ],
   "rules": {
     "react/jsx-filename-extension": [
@@ -22,5 +21,10 @@
     "no-underscore-dangle": 0,
     "react/prefer-stateless-function": 0,
     "linebreak-style": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
