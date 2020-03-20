@@ -35,17 +35,20 @@ describe('Test User Controller Api call', () => {
   });
 
   it('Creates an user, signin, call a protected route', async (done) => {
-    await httpMethod.post('/api/users', token, {
-      email: exampleUser.email,
-      role: 'admin',
-      firstName: exampleUser.firstName,
-      lastName: exampleUser.lastName,
-    }).expect(201);
-    const signinResponse = await httpMethod.post(
-      '/api/users/signin',
-      undefined,
-      { email: exampleUser.email, password: exampleUser.password },
-    ).expect(200);
+    await httpMethod
+      .post('/api/users', token, {
+        email: exampleUser.email,
+        role: 'admin',
+        firstName: exampleUser.firstName,
+        lastName: exampleUser.lastName,
+      })
+      .expect(201);
+    const signinResponse = await httpMethod
+      .post('/api/users/signin', undefined, {
+        email: exampleUser.email,
+        password: exampleUser.password,
+      })
+      .expect(200);
     const signin = signinResponse.body;
     console.log('signin', signin);
     await httpMethod.get('/api/users', token).expect(200);
