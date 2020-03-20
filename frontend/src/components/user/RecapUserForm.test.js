@@ -86,7 +86,7 @@ describe('UserForm tests', () => {
     });
     expect(getSpy).toHaveBeenCalledTimes(1);
     expect(getSpy).toHaveBeenCalledWith(
-      'http://localhost:4000/api/users ',
+      '/api/users ',
       state,
     );
     getSpy.mockClear();

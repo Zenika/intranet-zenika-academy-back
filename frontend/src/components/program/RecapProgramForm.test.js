@@ -97,7 +97,7 @@ describe('Recap Program tests', () => {
     });
     expect(getSpy).toHaveBeenCalledTimes(1);
     expect(getSpy).toHaveBeenCalledWith(
-      'http://localhost:4000/api/programs',
+      '/api/programs',
       state,
     );
     getSpy.mockClear();
