@@ -15,15 +15,17 @@ class RecapProgramForm extends React.Component {
   createProgram = (e) => {
     e.preventDefault();
     const { program } = this.props;
-    Axios.post('/api/programs', program)
-      .then(() => this.setState(() => ({ redirectToReferrer: true })));
+    Axios.post('/api/programs', program).then(() =>
+      this.setState(() => ({ redirectToReferrer: true })),
+    );
   };
 
   editProgram = (e) => {
     e.preventDefault();
     const { program } = this.props;
-    Axios.put(`/api/programs/${program.id}/update`, program)
-      .then(() => this.setState(() => ({ redirectToReferrer: true })));
+    Axios.put(`/api/programs/${program.id}/update`, program).then(() =>
+      this.setState(() => ({ redirectToReferrer: true })),
+    );
   };
 
   render() {

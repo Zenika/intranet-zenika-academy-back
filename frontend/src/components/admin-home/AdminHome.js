@@ -16,23 +16,21 @@ class AdminHome extends Component {
 
   componentDidMount() {
     this._isMounted = true;
-    document.title = 'Page d\'accueil Admin';
-    const token = sessionStorage.getItem("token");
-    axios.get('/api/promotions')
-      .then((res) => {
-        const promotions = res.data;
-        if (this._isMounted) {
-          this.setState({ promotions });
-        }
-      });
+    document.title = "Page d'accueil Admin";
+    const token = sessionStorage.getItem('token');
+    axios.get('/api/promotions').then((res) => {
+      const promotions = res.data;
+      if (this._isMounted) {
+        this.setState({ promotions });
+      }
+    });
 
-    axios.get('/api/programs')
-      .then((res) => {
-        const programs = res.data;
-        if (this._isMounted) {
-          this.setState({ programs });
-        }
-      });
+    axios.get('/api/programs').then((res) => {
+      const programs = res.data;
+      if (this._isMounted) {
+        this.setState({ programs });
+      }
+    });
   }
 
   componentWillUnmount() {

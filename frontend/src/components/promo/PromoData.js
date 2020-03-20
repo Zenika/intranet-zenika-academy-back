@@ -29,14 +29,13 @@ class PromoDetails extends Component {
     }
     const { match } = this.props;
     const url = `/api/promotions/details/${parseInt(match.params.id, 10)}`;
-    Axios.get(url)
-      .then((result) => {
-        this.setState({
-          users: result.data.users,
-          program: result.data.program,
-          promotion: result.data.promotion,
-        });
+    Axios.get(url).then((result) => {
+      this.setState({
+        users: result.data.users,
+        program: result.data.program,
+        promotion: result.data.promotion,
       });
+    });
   }
 
   /**

@@ -32,37 +32,45 @@ export class PromoCreateContainer extends Component {
       document.title = 'Edition de promotion';
       const { id } = match.params;
       const url = `/api/promotions/details/${parseInt(id, 10)}`;
-      Axios.get(url)
-        .then((result) => {
-          const { users, promotion, program } = result.data;
-          users.forEach((user) => {
-            if (user.role === 2) {
-              const obj = { label: `${user.firstName} ${user.lastName}`, value: user.id };
-              this.setState((state) => {
-                const teacherList = state.teachers.push(obj);
-                return teacherList;
-              });
-            }
-            if (user.role === 3) {
-              const obj = {
-                firstName: user.firstName, lastName: user.lastName, email: user.email, role: 'student',
-              };
-              this.setState((state) => {
-                const studentList = state.students.push(obj);
-                return studentList;
-              });
-            }
-          });
-          this.setState({
-            edit: true,
-            promoId: promotion.id,
-            title: promotion.title,
-            city: promotion.city,
-            startDate: promotion.startDate.substr(0, promotion.startDate.indexOf('T')),
-            endDate: promotion.endDate.substr(0, promotion.endDate.indexOf('T')),
-            program: [{ label: program.title, value: program.id }],
-          });
+      Axios.get(url).then((result) => {
+        const { users, promotion, program } = result.data;
+        users.forEach((user) => {
+          if (user.role === 2) {
+            const obj = {
+              label: `${user.firstName} ${user.lastName}`,
+              value: user.id,
+            };
+            this.setState((state) => {
+              const teacherList = state.teachers.push(obj);
+              return teacherList;
+            });
+          }
+          if (user.role === 3) {
+            const obj = {
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              role: 'student',
+            };
+            this.setState((state) => {
+              const studentList = state.students.push(obj);
+              return studentList;
+            });
+          }
         });
+        this.setState({
+          edit: true,
+          promoId: promotion.id,
+          title: promotion.title,
+          city: promotion.city,
+          startDate: promotion.startDate.substr(
+            0,
+            promotion.startDate.indexOf('T'),
+          ),
+          endDate: promotion.endDate.substr(0, promotion.endDate.indexOf('T')),
+          program: [{ label: program.title, value: program.id }],
+        });
+      });
     }
   }
 

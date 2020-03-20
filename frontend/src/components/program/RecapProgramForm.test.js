@@ -96,10 +96,7 @@ describe('Recap Program tests', () => {
       preventDefault: () => {},
     });
     expect(getSpy).toHaveBeenCalledTimes(1);
-    expect(getSpy).toHaveBeenCalledWith(
-      '/api/programs',
-      state,
-    );
+    expect(getSpy).toHaveBeenCalledWith('/api/programs', state);
     getSpy.mockClear();
   });
 

@@ -22,17 +22,17 @@ export class SignInModal extends Component {
 
   handleSignIn(user) {
     const { connect, toggleModal } = this.props;
-    axios.post('/api/users/signin', user)
+    axios
+      .post('/api/users/signin', user)
       .then((res) => {
         sessionStorage.setItem('promoId', `${res.data.promoId}`);
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('userRole', `${res.data.role}`);
         if (res.data.promoId) {
           const url = `/api/promotions/details/${res.data.promoId}`;
-          axios.get(url)
-            .then((result) => {
-              sessionStorage.setItem('programId', `${result.data.program.id}`);
-            });
+          axios.get(url).then((result) => {
+            sessionStorage.setItem('programId', `${result.data.program.id}`);
+          });
         }
         this.setState({ redirectToUser: false, redirectToAdmin: true });
         if (res.data.role === 3 || res.data.role === 2) {

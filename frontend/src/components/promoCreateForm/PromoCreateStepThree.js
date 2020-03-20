@@ -15,18 +15,27 @@ export class PromoCreateStepThree extends Component {
   componentDidMount() {
     const { promo } = this.props;
     setTimeout(() => {
-      axios.get('/api/users')
-        .then((res) => res.data.forEach((teacher) => {
-          /** RETRIEVE ONLY AVAILABLE OR THIS PROMO TEACHERS FOR MULTISELECT */
-          if (teacher.role === 2) {
-            if (!Number(teacher.promotionId) || teacher.promotionId === promo.promoId) {
-              const obj = { label: `${teacher.firstName} ${teacher.lastName}`, value: teacher.id };
-              this.setState((state) => {
-                const teacherList = state.teachers.push(obj);
-                return teacherList;
-              });
+      axios
+        .get('/api/users')
+        .then((res) =>
+          res.data.forEach((teacher) => {
+            /** RETRIEVE ONLY AVAILABLE OR THIS PROMO TEACHERS FOR MULTISELECT */
+            if (teacher.role === 2) {
+              if (
+                !Number(teacher.promotionId) ||
+                teacher.promotionId === promo.promoId
+              ) {
+                const obj = {
+                  label: `${teacher.firstName} ${teacher.lastName}`,
+                  value: teacher.id,
+                };
+                this.setState((state) => {
+                  const teacherList = state.teachers.push(obj);
+                  return teacherList;
+                });
+              }
             }
-        }}),
+          }),
         )
         .catch((err) => err);
     }, 100);

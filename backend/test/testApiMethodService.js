@@ -5,7 +5,7 @@ module.exports = {
   get: (url, token) => {
     const httpRequest = request(app).get(url);
     httpRequest.set('Origin', 'http://localhost:4000');
-    httpRequest.set('Cookie', `token=${token}` )
+    httpRequest.set('Cookie', `token=${token}`);
     return httpRequest;
   },
 
@@ -14,7 +14,7 @@ module.exports = {
     httpRequest.send(body);
     httpRequest.set('Accept', 'application/json');
     httpRequest.set('Origin', 'http://localhost:4000');
-    httpRequest.set('Cookie', `token=${token}` )
+    httpRequest.set('Cookie', `token=${token}`);
     return httpRequest;
   },
 
@@ -23,14 +23,14 @@ module.exports = {
     httpRequest.send(body);
     httpRequest.set('Accept', 'application/json');
     httpRequest.set('Origin', 'http://localhost:4000');
-    httpRequest.set('Cookie', `token=${token}` )
+    httpRequest.set('Cookie', `token=${token}`);
     return httpRequest;
   },
 
   delete: (url, token) => {
     const httpRequest = request(app).delete(url);
     httpRequest.set('Origin', 'http://localhost:4000');
-    httpRequest.set('Cookie', `token=${token}` )
+    httpRequest.set('Cookie', `token=${token}`);
     return httpRequest;
   },
 };
