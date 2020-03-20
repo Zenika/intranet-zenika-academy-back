@@ -82,11 +82,6 @@ module.exports = {
         promoId: foundUser.promotionId
       };
       const token = await createJwt(payload);
-      if (err) {
-        console.error("Error creating JWT", err);
-        res.status(500).send({ message: err.message });
-        return;
-      }
       return res
         .cookie("token", token, {
           maxAge: process.env.COOKIE_MAX_AGE_IN_MS,
