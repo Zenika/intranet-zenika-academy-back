@@ -8,7 +8,7 @@ const programs = require('./routes/programs');
 const { verifyJwt } = require('./utils/jwt');
 
 if (!process.env.JWT_SECRET) {
-  throw new Error('ERROR: JWT_SECURITY_KEY env variable not set');
+  throw new Error('ERROR: JWT_SECRET env variable not set');
 }
 if (!process.env.COOKIE_SECRET) {
   throw new Error('ERROR: COOKIE_SECRET env variable not set');
