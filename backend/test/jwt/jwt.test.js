@@ -22,7 +22,7 @@ describe('Test User Controller Api call', () => {
   let token = '';
 
   beforeAll(async () => {
-    process.env.JWT_SECRET = 'jwt secret for tests'
+    process.env.JWT_SECRET = 'jwt secret for tests';
     await Users.create({
       ...defaultUser,
       password: await bcrypt.hash('jwt', 10),
