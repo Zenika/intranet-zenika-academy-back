@@ -33,6 +33,8 @@ jobs:
       - run:
           command: npm test
           working_directory: backend
+          environment:
+            JWT_SECRET: jwt secret for tests
 
   frontend-build:
     docker:
