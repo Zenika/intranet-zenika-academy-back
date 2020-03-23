@@ -13,9 +13,6 @@ if (!process.env.JWT_SECRET) {
 if (!process.env.COOKIE_SECRET) {
   throw new Error('ERROR: COOKIE_SECRET env variable not set');
 }
-if (!process.env.COOKIE_MAX_AGE_IN_MS) {
-  throw new Error('ERROR: COOKIE_MAX_AGE_IN_MS env variable not set');
-}
 
 const port = process.env.PORT || '4000';
 const app = express();
