@@ -4,18 +4,6 @@ jobs:
   backend-build:
     docker:
       - image: circleci/node:12
-        environment:
-          MYSQL_HOST: localhost
-          MYSQL_PORT: 3306
-          MYSQL_DATABASE: zintranet
-          MYSQL_USER: zintranet
-          MYSQL_PASSWORD: zintranet
-      - image: mysql:8
-        environment:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: zintranet
-          MYSQL_USER: zintranet
-          MYSQL_PASSWORD: zintranet
     steps:
       - checkout
       - run:
@@ -26,9 +14,6 @@ jobs:
           working_directory: backend
       - run:
           command: npm run prettier:check
-          working_directory: backend
-      - run:
-          command: npm run migrate
           working_directory: backend
       - run:
           command: npm test

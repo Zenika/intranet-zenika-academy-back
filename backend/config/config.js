@@ -10,12 +10,8 @@ module.exports = {
     dialect: 'mysql',
   },
   test: {
-    database: process.env.MYSQL_DATABASE,
-    username: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    host: process.env.MYSQL_HOST,
-    port: process.env.MYSQL_PORT,
-    dialect: 'mysql',
+    database: 'sqlite::memory:',
+    dialect: 'sqlite'
   },
   production: {
     database: process.env.MYSQL_ADDON_DB,

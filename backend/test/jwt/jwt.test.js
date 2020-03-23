@@ -22,6 +22,7 @@ describe('Test User Controller Api call', () => {
   let token = '';
 
   beforeAll(async () => {
+    await Users.sync();
     await Users.create({
       ...defaultUser,
       password: await bcrypt.hash('jwt', 10),
