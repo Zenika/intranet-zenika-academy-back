@@ -16,7 +16,7 @@ jobs:
           command: npm run prettier:check
           working_directory: backend
       - run:
-          command: npm test
+          command: npm run test:ci
           working_directory: backend
           environment:
             JWT_SECRET: jwt secret for tests

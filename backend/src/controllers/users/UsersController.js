@@ -37,15 +37,15 @@ module.exports = {
       default:
         break;
     }
-    const foundUser = await Users.findOne({ where: { email: user.email } });
-    if (foundUser) {
-      res.status(409).json({ message: 'User already exists' });
-    }
     try {
       user.password = await bcrypt.hash(user.password, saltRounds);
       const userCreated = await Users.create(user);
       return res.status(201).send(userCreated);
     } catch (error) {
+      console.error(error);
+      if (error.name === 'SequelizeUniqueConstraintError') {
+        return res.status(409).send(error);
+      }
       return res.status(400).send(error);
     }
   },

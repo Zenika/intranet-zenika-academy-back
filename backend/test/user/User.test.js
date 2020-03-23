@@ -4,6 +4,35 @@ const httpMethod = require('../testApiMethodService');
 const { Users } = require('../../src/models');
 const { createJwt } = require('../../src/utils/jwt');
 
+describe('User model', () => {
+  beforeAll(async () => {
+    await Users.sync();
+  });
+
+  it('disallows invalid emails', async () => {
+    const userWithInvalidEmail = {
+      role: 1,
+      firstName: 'invalid-email',
+      lastName: 'invalid-email',
+      email: 'invalid-email',
+      password: 'invalid-email',
+    };
+    await expect(Users.create(userWithInvalidEmail)).rejects.toThrow();
+  });
+
+  it('disallows duplicate emails', async () => {
+    const duplicateUser = {
+      role: 1,
+      firstName: 'duplicate',
+      lastName: 'duplicate',
+      email: 'duplicate@zenika.com',
+      password: 'duplicate',
+    };
+    await Users.create(duplicateUser);
+    await expect(Users.create({ ...duplicateUser })).rejects.toThrow();
+  });
+});
+
 describe('Test User Controller Api call', () => {
   let testAdminUserId = '';
   let testAdminUserRole = 0;
@@ -53,6 +82,17 @@ describe('Test User Controller Api call', () => {
     expect(response.body.role).toEqual(1);
     expect(response.body.password).not.toEqual(body.password);
     done();
+  });
+
+  it('returns 409 Conflict on duplicate email', async () => {
+    const user = {
+      firstName: 'conflict',
+      lastName: 'conflict',
+      role: 'admin',
+      email: 'conflict@zenika.com',
+    };
+    await httpMethod.post('/api/users', token, user).expect(201);
+    await httpMethod.post('/api/users', token, { ...user }).expect(409);
   });
 
   it('Update the created admin user', async (done) => {
