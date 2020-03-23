@@ -84,7 +84,7 @@ module.exports = {
       const token = await createJwt(payload);
       return res
         .cookie('token', token, {
-          maxAge: process.env.COOKIE_MAX_AGE_IN_MS,
+          maxAge: process.env.COOKIE_MAX_AGE_IN_MS || 10 * 60 * 60 * 1000,
           httpOnly: true,
         })
         .status(200)
