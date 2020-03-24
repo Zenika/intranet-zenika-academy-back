@@ -4,6 +4,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const redirectSsl = require('redirect-ssl');
+const helmet = require('helmet');
 const promotions = require('./routes/promotions');
 const users = require('./routes/users');
 const programs = require('./routes/programs');
@@ -20,6 +21,7 @@ const port = process.env.PORT || '4000';
 const app = express();
 
 app.use(redirectSsl);
+app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
