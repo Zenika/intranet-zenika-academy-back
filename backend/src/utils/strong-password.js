@@ -19,7 +19,7 @@ const isStrongPassword = (password) => {
 };
 
 const randomStrongPassword = () => {
-  return crypto.randomBytes(6).toString('hex');
+  return crypto.randomBytes(16).toString('hex');
 };
 
 const defaultPasswords = ensureStrongPasswords({
