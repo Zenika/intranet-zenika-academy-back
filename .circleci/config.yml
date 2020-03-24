@@ -44,9 +44,47 @@ jobs:
           # even though it should according to https://create-react-app.dev/docs/running-tests
           command: npm run test:ci
           working_directory: frontend
+      - persist_to_workspace:
+          root: ./
+          paths: [frontend/build/]
+
+  deploy:
+    parameters:
+      clever-app-id:
+        type: string
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./
+      - run: mv frontend/build backend/public
+      - run:
+          name: Deploy to Clever Cloud
+          command: |
+            git config --global user.email "dsi@zenika.com"
+            git config --global user.name "Zenika"
+            git init
+            git add .
+            git commit -m "deploy!"
+            sudo npm install --global clever-tools
+            clever login --secret=$CLEVER_SECRET --token=$CLEVER_TOKEN
+            clever link << parameters.clever-app-id >>
+            clever deploy --force
+          working_directory: backend
 
 workflows:
   build:
     jobs:
       - backend-build
       - frontend-build
+      - deploy:
+          name: deploy-prod
+          requires:
+            - backend-build
+            - frontend-build
+          filters:
+            branches:
+              only: master
+          clever-app-id: app_5131bf64-5cd8-4bcc-ae34-86b739099c73
+          context: clever-cloud2-zenika-dev
