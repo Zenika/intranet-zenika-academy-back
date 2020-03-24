@@ -52,15 +52,23 @@ jobs:
     parameters:
       clever-app-id:
         type: string
+      deploy-dir:
+        type: string
+        default: ../deploy
     docker:
       - image: circleci/node:12
     steps:
       - checkout
       - attach_workspace:
           at: ./
-      - run: mv frontend/build backend/public
       - run:
-          name: Deploy to Clever Cloud
+          name: Package
+          command: |
+            mkdir --parents << parameters.deploy-dir >>/public
+            cp --recursive backend/* << parameters.deploy-dir >>/
+            cp --recursive frontend/build/* << parameters.deploy-dir >>/public/
+      - run:
+          name: Deploy
           command: |
             git config --global user.email "dsi@zenika.com"
             git config --global user.name "Zenika"
@@ -71,7 +79,7 @@ jobs:
             clever login --secret=$CLEVER_SECRET --token=$CLEVER_TOKEN
             clever link << parameters.clever-app-id >>
             clever deploy --force
-          working_directory: backend
+          working_directory: << parameters.deploy-dir >>
 
 workflows:
   build:
