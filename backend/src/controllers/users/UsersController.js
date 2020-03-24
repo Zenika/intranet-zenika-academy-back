@@ -1,6 +1,7 @@
 const { createJwt } = require('../../utils/jwt');
 const bcrypt = require('bcryptjs');
 const { Users } = require('../../models');
+const { defaultPasswords } = require('../../utils/strong-password');
 
 const saltRounds = 10;
 
@@ -23,15 +24,15 @@ module.exports = {
     const { user } = res.locals;
     switch (user.role) {
       case 'admin':
-        user.password = 'admin';
+        user.password = defaultPasswords.admin;
         user.role = 1;
         break;
       case 'teacher':
-        user.password = 'teacher';
+        user.password = defaultPasswords.teacher;
         user.role = 2;
         break;
       case 'student':
-        user.password = 'student';
+        user.password = defaultPasswords.student;
         user.role = 3;
         break;
       default:
