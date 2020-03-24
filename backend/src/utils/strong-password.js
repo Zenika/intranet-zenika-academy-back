@@ -15,11 +15,11 @@ const ensureStrongPasswords = (defaultPasswords) => {
 };
 
 const isStrongPassword = (password) => {
-  return password && password.length >= 16 && !password.match(/(.)\1{15}/);
+  return password && password.length >= 12 && !password.match(/(.)\1{15}/);
 };
 
 const randomStrongPassword = () => {
-  return crypto.randomBytes(16).toString('hex');
+  return crypto.randomBytes(6).toString('hex');
 };
 
 const defaultPasswords = ensureStrongPasswords({
