@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const redirectSsl = require('redirect-ssl');
 const promotions = require('./routes/promotions');
 const users = require('./routes/users');
 const programs = require('./routes/programs');
@@ -18,6 +19,7 @@ if (!process.env.COOKIE_SECRET) {
 const port = process.env.PORT || '4000';
 const app = express();
 
+app.use(redirectSsl);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
