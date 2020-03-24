@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
@@ -17,22 +18,12 @@ if (!process.env.COOKIE_SECRET) {
 const port = process.env.PORT || '4000';
 const app = express();
 
-app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  next();
-});
-
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.use(async (req, res, next) => {
-  if (req.url === '/api/users/signin') {
+  if (!req.url.startsWith('/api') || req.url === '/api/users/signin') {
     next();
     return;
   }
@@ -50,23 +41,18 @@ app.use('/api/users', users);
 app.use('/api/programs', programs);
 app.use('/api/promotions', promotions);
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use((err, req, res) => {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = err;
-
-  // render the error page
-  res.status(err.status || 500);
-  res.send(res.locals.message);
-});
+if (
+  process.env.SERVE_FRONTEND === 'true' ||
+  process.env.NODE_ENV === 'production'
+) {
+  // serve front-end
+  const assetFolder = path.resolve('./public');
+  app.use(express.static(assetFolder));
+  app.use((req, res) => {
+    res.sendFile(path.join(assetFolder, 'index.html'));
+  });
+  console.log('serving files from', assetFolder);
+}
 
 module.exports = app;
 
